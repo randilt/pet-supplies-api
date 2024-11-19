@@ -100,90 +100,12 @@ if (!$productFound) {
             <!-- Product Description -->
             <div class="mt-12">
                 <h2 class="text-2xl font-bold mb-4">Product Description</h2>
-                <p class="text-gray-600 mb-4">Our Premium Dog Food is crafted with care to provide your furry friend with
-                    the best nutrition possible. Made with high-quality ingredients, this food is designed to support your
-                    dog's overall health and well-being.</p>
-                <ul class="list-disc list-inside text-gray-600 mb-4">
-                    <li>Made with real meat as the first ingredient</li>
-                    <li>Contains a blend of fruits and vegetables for essential vitamins and minerals</li>
-                    <li>No artificial preservatives, colors, or flavors</li>
-                    <li>Supports healthy digestion with added probiotics</li>
-                    <li>Promotes a shiny coat and healthy skin with Omega-3 and Omega-6 fatty acids</li>
-                </ul>
-                <p class="text-gray-600">Suitable for adult dogs of all breeds and sizes, this premium dog food will keep
-                    your canine companion happy, healthy, and full of energy.</p>
+                <p class="text-gray-600 mb-4"><?php echo $description; ?></p>
             </div>
             <!-- Related Products -->
-            <div class="mt-12">
-                <h2 class="text-2xl font-bold mb-6">Related Products</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                            alt="Interactive Cat Toy" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold mb-2">Interactive Cat Toy</h3>
-                            <p class="text-gray-600 mb-4">Keep your feline friend entertained for hours</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-primary">$12.99</span>
-                                <button
-                                    class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
-                                    to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                            alt="Durable Dog Leash" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold mb-2">Durable Dog Leash</h3>
-                            <p class="text-gray-600 mb-4">Strong and comfortable for daily walks</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-primary">$19.99</span>
-                                <button
-                                    class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
-                                    to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1535294435445-d7249524ef2e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                            alt="Pet Grooming Kit" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold mb-2">Pet Grooming Kit</h3>
-                            <p class="text-gray-600 mb-4">Complete set for home grooming needs</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-primary">$34.99</span>
-                                <button
-                                    class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
-                                    to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                            alt="Pet Bed" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold mb-2">Luxury Pet Bed</h3>
-                            <p class="text-gray-600 mb-4">Comfortable and stylish rest for pets</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-primary">$49.99</span>
-                                <button
-                                    class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
-                                    to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php require 'partials/related_products.php'; ?>
         <?php else: ?>
-            <div class="text-center py-16">
-                <h1 class="text-4xl font-bold mb-4">404 - Product Not Found</h1>
-                <p class="text-xl text-gray-600 mb-8">We're sorry, but the product you're looking for doesn't exist or has
-                    been removed.</p>
-                <a href="./products"
-                    class="bg-primary text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Return to
-                    All Products</a>
-            </div>
+            <?php require 'partials/product_not_found.php'; ?>
         <?php endif; ?>
     </main>
     <?php require 'partials/footer.php'; ?>
