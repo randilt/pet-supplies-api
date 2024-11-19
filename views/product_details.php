@@ -10,38 +10,7 @@
 </head>
 
 <body class="font-sans bg-gray-100 text-gray-900">
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary">Pawsome</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-primary transition">Home</a>
-                <a href="#" class="text-gray-600 hover:text-primary transition">Products</a>
-                <a href="#" class="text-gray-600 hover:text-primary transition">About</a>
-                <a href="#" class="text-gray-600 hover:text-primary transition">Contact</a>
-            </div>
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="#" class="text-gray-600 hover:text-primary transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                </a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white">
-            <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">Home</a>
-            <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">Products</a>
-            <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">About</a>
-            <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">Contact</a>
-        </div>
-    </header>
+    <?php require 'partials/navbar.php'; ?>
     <main class="container mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Product Images -->
@@ -282,54 +251,7 @@
             </div>
         </div>
     </main>
-    <footer class="bg-gray-800 text-white py-8 mt-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">About Us</h3>
-                    <p class="text-gray-400">Pawsome is dedicated to providing quality pet supplies for your beloved
-                        companions.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-white">Home</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-white">Products</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-white">About</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-gray-400 hover:text-white">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>Email: info@pawsome.com</li>
-                        <li>Phone: (555) 123-4567</li>
-                        <li>Address: 123 Pet Street, Anytown, ST 12345</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
-                    <form class="space-y-4">
-                        <input type="email" placeholder="Enter your email"
-                            class="w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        <button
-                            class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-                <p>&copy; 2023 Pawsome. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <?php require 'partials/footer.php'; ?>
     <script>
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
