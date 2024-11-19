@@ -13,7 +13,7 @@ try {
     $auth = new Auth($db);
     
     // This is a protected route
-    $auth->requireAuth();
+    // $auth->requireAuth();
     
     $conn = $db->getConnection();
     
