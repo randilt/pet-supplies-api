@@ -1,24 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Supplies Store</title>
-</head>
-<body>
-    <header>
-        <h1>Welcome to Pet Supplies Store</h1>
-    </header>
-    
-    <main>
-        <section>
-            <h2>Our Products</h2>
-            <p>Browse our wide selection of pet supplies and accessories.</p>
-        </section>
-    </main>
+<?php
+define('BASE_URL', '/pet-supplies-store-api');
+$routes = [
+    "/" => "views/home.php",
+    "/products" => "views/products_page.php",
+    "/product" => "views/product_details.php",
 
-    <footer>
-        <p>&copy; 2023 Pet Supplies Store. All rights reserved.</p>
-    </footer>
-</body>
-</html></html>
+];
+
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = str_replace(BASE_URL, "", $uri);
+
+// Check for dynamic product routes
+if (preg_match('/^\/product\/([a-zA-Z0-9-]+)$/', $uri, $matches)) {
+    // $matches[1] contains the slug or ID
+    $productIdentifier = $matches[1];
+
+    // Set this as a variable that can be used in your product view
+    $_GET['product_identifier'] = $productIdentifier;
+
+    // Load the product detail page
+    require "views/single_product.php";
+    exit;
+}
+
+if (array_key_exists($uri, $routes)) {
+    require $routes[$uri];
+
+} else {
+    http_response_code(404);
+    require "views/404.php";
+    die();
+}
