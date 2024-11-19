@@ -1,5 +1,5 @@
 <?php
-// File: api/products/delete_product.php
+
 require_once '../../config/database.php';
 require_once '../../utils/Response.php';
 require_once '../../utils/Database.php';

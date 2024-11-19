@@ -1,5 +1,4 @@
 <?php
-// File: api/admin/login.php
 
 require_once '../../../config/database.php';
 require_once '../../../utils/Response.php';
@@ -50,3 +49,6 @@ try {
         'message' => $e->getMessage()
     ], 500);
 }
+
+
+// admin@example.com, Admin123!
