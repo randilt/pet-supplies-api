@@ -11,10 +11,16 @@
 <body>
     <?php require 'partials/navbar.php'; ?>
 
-    <h1>404</h1>
-    <p>Page not found</p>
-    <a href="./">Go back to home</a>
+    <div class="text-center py-16">
+        <h1 class="text-4xl font-bold mb-4">404 - Page Not Found</h1>
+        <p class="text-xl text-gray-600 mb-8">We're sorry, but the page you're looking for doesn't exist or has
+            been removed.</p>
+        <a href="./"
+            class="bg-primary text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Return to
+            Home</a>
+    </div>
 
+    <?php require 'partials/footer.php'; ?>
 </body>
 
 </html>
