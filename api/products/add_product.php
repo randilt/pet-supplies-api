@@ -12,8 +12,9 @@ try {
     $db = new Database();
     $auth = new Auth($db);
     
-    // This is a protected route
+    // This is a protected route for admins
     $auth->requireAuth();
+    $auth->requireAdmin();
     
     // Get JSON input
     $json = file_get_contents('php://input');

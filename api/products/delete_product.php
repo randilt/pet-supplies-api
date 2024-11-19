@@ -13,8 +13,9 @@ try {
     $db = new Database();
     $auth = new Auth($db);
     
-    // This is a protected route
+    // This is a protected route for admins
     $auth->requireAuth();
+    $auth->requireAdmin();
     
     // Get product ID from URL parameter
     $product_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
