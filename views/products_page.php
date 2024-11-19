@@ -1,61 +1,8 @@
 <?php
-// Use curl for more reliable API fetching
-$apiUrl = 'http://localhost/pet-supplies-store-api/api/products/get_products.php'; // Relative path
+require_once 'functions.php';
 
-// Initialize cURL
-$ch = curl_init();
+$products = fetchProducts();
 
-// Set cURL options
-curl_setopt($ch, CURLOPT_URL, $apiUrl);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-// Execute and get the response
-$response = curl_exec($ch);
-
-// Check for cURL errors
-if (curl_errno($ch)) {
-  echo 'Curl error: ' . curl_error($ch);
-  die();
-}
-
-// Close cURL resource
-curl_close($ch);
-
-// Decode JSON response
-$data = json_decode($response, true);
-
-// Validate JSON decoding
-if (json_last_error() !== JSON_ERROR_NONE) {
-  die('Failed to parse JSON: ' . json_last_error_msg());
-}
-
-// // Debug: print raw response and parsed data
-// echo "Raw Response:<pre>";
-// print_r($response);
-// echo "</pre>";
-
-// echo "Parsed Data:<pre>";
-// print_r($data);
-// echo "</pre>";
-
-// Check if products exist in the response
-$products = $data['products'] ?? [];
-
-// Display products
-// if (!empty($products)) {
-//   foreach ($products as $product) {
-//     echo '<div>';
-//     echo 'id: ' . htmlspecialchars($product['id']) . '<br>';
-//     echo 'Name: ' . htmlspecialchars($product['name']) . '<br>';
-//     echo 'Price: $' . htmlspecialchars($product['price']) . '<br>';
-//     echo 'Category: ' . htmlspecialchars($product['category_name']) . '<br>';
-//     echo 'Stock: ' . htmlspecialchars($product['stock_quantity']) . '<br>';
-//     echo '</div><hr>';
-//   }
-// } else {
-//   echo 'No products found.';
-// }
 ?>
 
 
