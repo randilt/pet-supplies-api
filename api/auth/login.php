@@ -2,6 +2,7 @@
 require_once '../../config/database.php';
 require_once '../../utils/Response.php';
 require_once '../../utils/Database.php';
+require_once '../../utils/Auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     Response::json(['error' => 'Method not allowed'], 405);
@@ -18,20 +19,13 @@ try {
     $password = $data['password'];
     
     $db = new Database();
-    $conn = $db->getConnection();
+    $auth = new Auth($db);
     
-    $stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if (!$user || !password_verify($password, $user['password'])) {
+    if ($auth->loginUser($email, $password)) {
+        Response::json(['message' => 'Login successful']);
+    } else {
         Response::json(['error' => 'Invalid credentials'], 401);
     }
-    
-    session_start();
-    $_SESSION['user_id'] = $user['id'];
-    
-    Response::json(['message' => 'Login successful']);
 } catch (Exception $e) {
     Response::json(['error' => $e->getMessage()], 500);
 }
