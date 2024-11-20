@@ -1,8 +1,26 @@
 <?php
 
-function fetchProducts($limit = 20)
+function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20)
 {
-    $apiUrl = 'http://localhost/pawsome/api/products/get_products.php?limit=' . $limit;
+    $queryParams = array('limit' => $limit);
+
+    if ($minPrice !== null) {
+        $queryParams['min_price'] = $minPrice;
+    }
+
+    if ($maxPrice !== null) {
+        $queryParams['max_price'] = $maxPrice;
+    }
+
+    if ($categoryId !== null) {
+        $queryParams['category_id'] = $categoryId;
+    }
+
+    if ($search !== null) {
+        $queryParams['search'] = $search;
+    }
+
+    $apiUrl = 'http://localhost/pawsome/api/products/get_products.php?' . http_build_query($queryParams);
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
