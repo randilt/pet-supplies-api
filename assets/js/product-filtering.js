@@ -5,12 +5,20 @@ document.addEventListener('DOMContentLoaded', function () {
   const minPriceInput = document.getElementById('min-price')
   const maxPriceInput = document.getElementById('max-price')
   const filterParameters = document.getElementById('filter-parameters')
+  const resetFilters = document.getElementById('reset-filters')
+
+  // Reset filters
+  resetFilters.addEventListener('click', function (e) {
+    e.preventDefault()
+    window.location.href = './products'
+  })
 
   filterForm.addEventListener('submit', function (event) {
     event.preventDefault()
 
     const search = searchInput.value.trim()
-    const category = [...categoryInputs].find((input) => input.checked)?.value
+    const categorySelect = document.querySelector('select[name="category"]')
+    const category = categorySelect.value
     const minPrice = minPriceInput.value.trim()
     const maxPrice = maxPriceInput.value.trim()
 
@@ -18,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Only append parameters if they have values
     if (search !== '') params.append('search', search)
-    if (category) params.append('category_id', category)
+    if (category !== '') params.append('category_id', category)
     if (minPrice !== '') params.append('min_price', minPrice)
     if (maxPrice !== '') params.append('max_price', maxPrice)
 

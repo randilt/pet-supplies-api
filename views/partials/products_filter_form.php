@@ -19,16 +19,15 @@
             <!-- Category -->
             <div class="mb-6">
                 <h3 class="font-semibold mb-2">Category</h3>
-                <div class="space-y-3">
+                <select name="category"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary">
+                    <option value="">Select Product Category</option>
                     <?php foreach ($categories as $category): ?>
-                        <label
-                            class="flex items-center cursor-pointer group hover:text-primary transition-colors duration-200">
-                            <input type="radio" name="category" value="<?php echo htmlspecialchars($category['id']); ?>"
-                                class="form-checkbox h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
-                            <span class="ml-2 text-sm"><?php echo htmlspecialchars($category['name']); ?></span>
-                        </label>
+                        <option value="<?php echo htmlspecialchars($category['id']); ?>" <?php echo (isset($categoryId) && $categoryId == $category['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($category['name']); ?>
+                        </option>
                     <?php endforeach; ?>
-                </div>
+                </select>
             </div>
 
             <!-- Price Range -->
@@ -44,9 +43,16 @@
             </div>
 
             <!-- Apply Filters Button -->
+
             <button type="submit"
                 class="w-full bg-accent text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300">
                 Apply Filters
+            </button>
+            <!-- Reset Filters Button -->
+            <button id="reset-filters" href="./products"
+                class="w-full bg-gray-200 mt-2 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition duration-300"
+                id="reset-filters">
+                Reset Filters
             </button>
         </form>
     </div>
