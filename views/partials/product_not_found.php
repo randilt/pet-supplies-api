@@ -1,8 +1,23 @@
-<div class="text-center py-16 min-h-screen flex items-center justify-center flex-col">
-    <h1 class="text-4xl font-bold mb-4">404 - Product Not Found</h1>
-    <p class="text-xl text-gray-600 mb-8">We're sorry, but the product you're looking for doesn't exist or has
-        been removed.</p>
-    <a href="./products"
-        class="bg-primary text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Return to
-        All Products</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body class="font-nunito">
+
+
+    <div class="text-center py-16 min-h-screen flex items-center justify-center flex-col">
+        <h1 class="text-5xl md:text-7xl  mb-4 font-chewy">404 - Uh-oh! <br>The Product is Playing Hide and Seek!
+        </h1>
+        <p class="text-xl text-gray-600 mb-8">
+            Sorry to inform,
+            but it seems this product has run away with a pack of mischievous puppies!
+        </p>
+        <a href="./"
+            class="inline-block bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300">Back
+            To Home</a>
+    </div>
+
+
+</body>
+
+</html>

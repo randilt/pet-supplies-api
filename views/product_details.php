@@ -44,9 +44,9 @@ if (!$productFound) {
 
 <?php
 if ($productFound) {
-    echo '<title>' . $title . ' | Pawsome | Premium Pet Supplies</title>';
+    $title = $title . ' | Pawsome | Premium Pet Supplies</title>';
 } else {
-    echo 'Product Not Found | Pawsome | Premium Pet Supplies';
+    $title = 'Product Not Found | Pawsome | Premium Pet Supplies';
 }
 require 'partials/header.php';
 
