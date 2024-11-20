@@ -19,6 +19,16 @@ if ($productId) {
         $description = $product['description'];
         $price = htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8');
         $img_url = $product['image_url'];
+        $long_description = htmlspecialchars($product['long_description'], ENT_QUOTES, 'UTF-8');
+        $stock_qty = $product['stock_quantity'];
+        $category_id = $product['category_id'];
+        $category_name = $product['category_name'];
+        $variants = $product['variants'];
+
+        $in_stock = $stock_qty > 0;
+
+        // $stock_qty < 20 ? $stock_status = 'bg-red-500' : $stock_status = 'bg-green-500';
+
         $productFound = true;
     }
 }
@@ -68,6 +78,13 @@ if (!$productFound) {
                         LKR <?php echo $price; ?>
                     </p>
                     <p class="text-gray-600 mb-6"><?php echo $description; ?></p>
+
+                    <p>
+                        <span
+                            class="inline-block px-3 py-1 mb-4 text-sm font-semibold rounded-full <?php echo $in_stock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'; ?>">
+                            <?php echo $in_stock ? 'In Stock' : 'Out of Stock'; ?>
+                        </span>
+                    </p>
                     <div class="mb-6">
                         <h2 class="font-semibold mb-2">Size</h2>
                         <div class="flex space-x-4">
@@ -100,7 +117,7 @@ if (!$productFound) {
             <!-- Product Description -->
             <div class="mt-12">
                 <h2 class="text-2xl font-bold mb-4">Product Description</h2>
-                <p class="text-gray-600 mb-4"><?php echo $description; ?></p>
+                <p class="text-gray-600 mb-4"><?php echo $long_description; ?></p>
             </div>
             <!-- Related Products -->
             <?php require 'partials/related_products.php'; ?>
