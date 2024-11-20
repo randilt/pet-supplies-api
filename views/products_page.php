@@ -31,7 +31,7 @@ $categories = fetchCategories();
 <body class="font-sans bg-gray-100 text-gray-900">
   <?php require 'partials/navbar.php'; ?>
   <main class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Our Products</h1>
+    <h1 class="text-3xl font-bold mb-8 text-accent">Our Products</h1>
 
     <div class="flex flex-col md:flex-row gap-8">
       <!-- Filters Column -->
@@ -41,12 +41,12 @@ $categories = fetchCategories();
         <!-- Sort and Limit Options -->
         <?php require 'partials/products_sort_limit.php'; ?>
 
-        <!-- Product Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Product Cars -->
-          <?php require_once 'partials/product_card_grid.php'; ?>
 
-        </div>
+
+        <!-- Products Grid -->
+        <?php require_once 'partials/product_card_grid.php'; ?>
+
+
 
         <!-- Pagination -->
         <?php require 'partials/pagination.php'; ?>

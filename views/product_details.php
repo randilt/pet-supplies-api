@@ -93,7 +93,7 @@ if (!$productFound) {
                             </span>
                         <?php endif; ?>
                     </p>
-                    <div class="mb-6">
+                    <!-- <div class="mb-6">
                         <h2 class="font-semibold mb-2">Size</h2>
                         <div class="flex space-x-4">
                             <button
@@ -106,7 +106,7 @@ if (!$productFound) {
                                 class="px-4 py-2 border border-gray-300 rounded-md hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary">20
                                 lbs</button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="mb-6">
                         <h2 class="font-semibold mb-2">Quantity</h2>
                         <div class="flex items-center space-x-4">
@@ -123,17 +123,17 @@ if (!$productFound) {
                         <input type="hidden" id="max-quantity" value="<?php echo $in_stock ? $stock_qty : 0; ?>">
                     </div>
                     <button
-                        class="w-full bg-primary text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Add
+                        class="w-full bg-accent text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Add
                         to Cart</button>
                 </div>
             </div>
             <!-- Product Description -->
             <div class="mt-12">
                 <h2 class="text-2xl font-bold mb-4">Product Description</h2>
-                <p class="text-gray-600 mb-4"><?php echo $long_description; ?></p>
+                <p class="text-gray-600 mb-4"><?php echo nl2br($long_description); ?></p>
             </div>
             <!-- Related Products -->
-            <?php require 'partials/related_products.php'; ?>
+            <?php #require 'partials/related_products.php'; ?>
         <?php else: ?>
             <?php require 'partials/product_not_found.php'; ?>
         <?php endif; ?>

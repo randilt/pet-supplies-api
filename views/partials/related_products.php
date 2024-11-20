@@ -10,7 +10,7 @@
                 <div class="flex justify-between items-center">
                     <span class="text-lg font-bold text-primary">$12.99</span>
                     <button
-                        class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
+                        class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
                         to Cart</button>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="flex justify-between items-center">
                     <span class="text-lg font-bold text-primary">$19.99</span>
                     <button
-                        class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
+                        class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
                         to Cart</button>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="flex justify-between items-center">
                     <span class="text-lg font-bold text-primary">$34.99</span>
                     <button
-                        class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
+                        class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
                         to Cart</button>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="flex justify-between items-center">
                     <span class="text-lg font-bold text-primary">$49.99</span>
                     <button
-                        class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
+                        class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Add
                         to Cart</button>
                 </div>
             </div>

@@ -45,7 +45,7 @@
 
             <!-- Apply Filters Button -->
             <button type="submit"
-                class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300">
+                class="w-full bg-accent text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300">
                 Apply Filters
             </button>
         </form>
