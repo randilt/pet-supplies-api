@@ -24,7 +24,17 @@ try {
     if ($product_id) {
         $query = "
             SELECT 
-                p.*,
+                p.id,
+                p.category_id,
+                p.name,
+                p.description,
+                p.long_description,
+                p.price,
+                p.stock_quantity,
+                p.image_url,
+                p.variants,
+                p.created_at,
+                p.updated_at,
                 c.name as category_name,
                 c.description as category_description
             FROM products p
@@ -47,7 +57,6 @@ try {
         exit;
     }
 
-    // Existing list query logic remains the same as in the previous version
     // Get query parameters with defaults
     $category_id = isset($_GET['category_id']) ? (int) $_GET['category_id'] : null;
     $search = isset($_GET['search']) ? trim($_GET['search']) : null;
@@ -69,7 +78,17 @@ try {
     // Base query
     $query = "
         SELECT 
-            p.*,
+            p.id,
+            p.category_id,
+            p.name,
+            p.description,
+            p.long_description,
+            p.price,
+            p.stock_quantity,
+            p.image_url,
+            p.variants,
+            p.created_at,
+            p.updated_at,
             c.name as category_name,
             c.description as category_description
         FROM products p
