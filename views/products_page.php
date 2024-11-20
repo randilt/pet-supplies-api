@@ -39,28 +39,7 @@ $categories = fetchCategories();
       <!-- Products Column -->
       <div class="md:w-3/4">
         <!-- Sort and Limit Options -->
-        <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
-          <div class="flex items-center mb-4 sm:mb-0">
-            <label for="sort" class="mr-2">Sort by:</label>
-            <select id="sort" name="sort"
-              class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary">
-              <option value="popular">Most Popular</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="newest">Newest</option>
-            </select>
-          </div>
-          <div class="flex items-center">
-            <label for="limit" class="mr-2">Show:</label>
-            <select id="limit" name="limit"
-              class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary">
-              <option value="12">12</option>
-              <option value="24">24</option>
-              <option value="36">36</option>
-              <option value="48">48</option>
-            </select>
-          </div>
-        </div>
+        <?php require 'partials/products_sort_limit.php'; ?>
 
         <!-- Product Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -70,30 +49,7 @@ $categories = fetchCategories();
         </div>
 
         <!-- Pagination -->
-        <div class="mt-8 flex justify-center">
-          <nav class="inline-flex rounded-md shadow">
-            <a href="#"
-              class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-              Previous
-            </a>
-            <a href="#"
-              class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-              1
-            </a>
-            <a href="#"
-              class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-              2
-            </a>
-            <a href="#"
-              class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-              3
-            </a>
-            <a href="#"
-              class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-              Next
-            </a>
-          </nav>
-        </div>
+        <?php require 'partials/pagination.php'; ?>
       </div>
     </div>
   </main>
