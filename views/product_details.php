@@ -117,6 +117,8 @@ if (!$productFound) {
                         <?php if ($in_stock): ?>
                             <input type="hidden" id="max-quantity" value="<?php echo $stock_qty; ?>">
                         <?php endif; ?>
+                        <!-- Add this right after your quantity controls -->
+                        <input type="hidden" id="max-quantity" value="<?php echo $in_stock ? $stock_qty : 0; ?>">
                     </div>
                     <button
                         class="w-full bg-primary text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Add
@@ -135,47 +137,8 @@ if (!$productFound) {
         <?php endif; ?>
     </main>
     <?php require 'partials/footer.php'; ?>
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        // Quantity controls
-        const decreaseButton = document.getElementById('decrease-quantity');
-        const increaseButton = document.getElementById('increase-quantity');
-        const quantityElement = document.getElementById('quantity');
-        const currentStockQty = <?php echo $stock_qty; ?>;
-        console.log(currentStockQty);
+    <script src="assets/js/product-detail.js"></script>
 
-        let quantity = 1;
-        decreaseButton.addEventListener('click', () => {
-            if (quantity > 1) {
-                quantity--;
-                quantityElement.textContent = quantity;
-                increaseButton.disabled = false;
-            }
-        });
-        increaseButton.addEventListener('click', () => {
-            if (quantity < currentStockQty) {
-                quantity++;
-                quantityElement.textContent = quantity;
-                if (quantity >= currentStockQty) {
-                    increaseButton.disabled = true;
-                }
-            }
-        });
-
-        // Thumbnail image click handlers
-        const mainImage = document.getElementById('main-image');
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        thumbnails.forEach(thumbnail => {
-            thumbnail.addEventListener('click', () => {
-                mainImage.src = thumbnail.src;
-            });
-        });
-    </script>
 </body>
 
 </html>
