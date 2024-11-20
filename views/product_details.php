@@ -42,17 +42,17 @@ if (!$productFound) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?php echo $productFound ? $title . ' | Pawsome Pet Supplies' : 'Product Not Found | Pawsome Pet Supplies'; ?>
-    </title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="assets/css/styles.css" rel="stylesheet">
-</head>
+<?php
+if ($productFound) {
+    echo '<title>' . $title . ' | Pawsome | Premium Pet Supplies</title>';
+} else {
+    echo 'Product Not Found | Pawsome | Premium Pet Supplies';
+}
+require 'partials/header.php';
 
-<body class="font-sans bg-gray-100 text-gray-900">
+?>
+
+<body class="font-nunito bg-gray-100 text-gray-900">
     <?php require 'partials/navbar.php'; ?>
     <main class="container mx-auto px-4 py-8">
         <?php if ($productFound): ?>
@@ -75,7 +75,7 @@ if (!$productFound) {
                 </div>
                 <!-- Product Details -->
                 <div class="md:w-1/2">
-                    <h1 class="text-3xl font-bold mb-4"><?php echo $title; ?></h1>
+                    <h1 class="text-3xl md:text-5xl font-extralight font-chewy mb-4"><?php echo $title; ?></h1>
                     <p class="text-2xl font-bold text-primary mb-4">
                         LKR <?php echo $price; ?>
                     </p>

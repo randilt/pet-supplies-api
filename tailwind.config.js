@@ -11,6 +11,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        nunito: ['Nunito', 'sans-serif'],
+        chewy: ['Chewy', 'cursive'],
       },
     },
   },

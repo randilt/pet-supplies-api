@@ -20,18 +20,16 @@ $categories = fetchCategories();
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pawsome - Products</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="assets/css/styles.css" rel="stylesheet" />
-</head>
+<?php
+$title = "Our Products | Pawsome | Premium Pet Suppliess";
+require 'partials/header.php';
 
-<body class="font-sans bg-gray-100 text-gray-900">
+?>
+
+<body class="font-nunito bg-gray-100 text-gray-900">
   <?php require 'partials/navbar.php'; ?>
   <main class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8 text-accent">Our Products</h1>
+    <h1 class="text-3xl font-extralight font-chewy mb-4 text-accent">Our Products</h1>
 
     <div class="flex flex-col md:flex-row gap-8">
       <!-- Filters Column -->

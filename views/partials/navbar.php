@@ -2,14 +2,15 @@
 $menuItems = [
     ['url' => '.', 'text' => 'Home'],
     ['url' => './products', 'text' => 'Products'],
+    ['url' => './subscription', 'text' => 'Pawsome Box'],
     ['url' => './about', 'text' => 'About'],
     ['url' => './contact', 'text' => 'Contact'],
 ];
 ?>
 
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="." class="text-2xl font-bold text-primary">Pawsome</a>
+<header class="bg-white shadow-sm sticky top-0 z-50 font-nunito">
+    <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <a href="." class="text-4xl font-chewy font-bold text-gray-800">Pawsome</a>
 
         <div class="hidden md:flex space-x-6">
             <?php foreach ($menuItems as $item): ?>

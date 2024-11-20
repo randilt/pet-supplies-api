@@ -5,6 +5,8 @@ $routes = [
     "/products" => "views/products_page.php",
     "/product" => "views/product_details.php",
     "/about" => "views/about.php",
+    "/contact" => "views/contact.view.php",
+    "/subscription" => "views/subscription.view.php",
 
 ];
 

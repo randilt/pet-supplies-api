@@ -44,11 +44,11 @@ function renderSocialIcons($socialMedia)
 }
 ?>
 
-<footer class="bg-secondary text-white py-12">
+<footer class="bg-secondary text-white py-12 font-nunito">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-                <h2 class="text-xl font-semibold mb-4">Pawsome</h2>
+                <h2 class="text-3xl font-semibold mb-4 font-chewy ">Pawsome</h2>
                 <p class="text-gray-200">
                     Elevating pet care with premium supplies
                 </p>

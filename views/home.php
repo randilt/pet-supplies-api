@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pawsome - Modern Pet Supplies</title>
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  <link href="assets/css/styles.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="output.css" rel="stylesheet" />
-</head>
+<?php
+$title = "Pawsome | Premium Pet Suppliess";
+require 'partials/header.php';
 
-<body class="font-sans bg-gray-50 text-gray-800">
+?>
+
+<body class="font-nunito bg-gray-50 text-gray-800">
 
   <?php require 'partials/navbar.php'; ?>
   <main>
@@ -29,37 +25,19 @@
       <div class="container mx-auto px-4 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-1 gap-12 items-center">
           <!-- Main Hero Content -->
-          <div class="text-center md:text-left space-y-3">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+          <div class="text-center md:text-left space-y-3 font-chewy">
+            <h1 class="text-4xl md:text-6xl font-extralight leading-tight">
               Elevate Your Pet's Lifestyle
             </h1>
-            <p class="text-xl text-white/90">
+            <p class="text-2xl text-white/90">
               Discover premium pet supplies tailored for your furry friends
             </p>
-            <div class="pt-4">
+            <div class="pt-4 font-nunito">
               <a href="./products"
                 class="bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Shop
                 Now</a>
             </div>
           </div>
-
-          <!-- Subscription Promo Card -->
-          <!-- <div class="bg-white/30 backdrop-blur-lg rounded-2xl p-8 text-center space-y-4">
-            <span class="text-white font-semibold text-sm uppercase tracking-wider">
-              Special Offer
-            </span>
-            <h2 class="text-3xl font-bold text-gray-800">
-              Pawsome Box Subscription
-            </h2>
-            <p class="text-lg text-black/90">
-              Premium pet essentials delivered monthly
-            </p>
-            <div class="pt-4">
-              <a href="#subscription"
-                class="bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-accent/80 transition duration-300 inline-block">Learn
-                More</a>
-            </div>
-          </div> -->
         </div>
       </div>
     </section>
@@ -67,12 +45,34 @@
     <!-- Recent Products -->
     <?php require 'partials/recent_products.php'; ?>
 
+    <!-- About Us Section -->
+    <section class="bg-gray-100 py-16">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <div class="md:w-1/2">
+            <img
+              src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1586&q=80"
+              alt="Happy pets" class="rounded-lg shadow-lg" />
+          </div>
+          <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
+            <h2 class="text-3xl md:text-5xl font-normal mb-4 font-chewy">About Pawsome</h2>
+            <p class="text-xl mb-6 text-gray-600">
+              We're passionate about providing the best for your pets. Our
+              curated selection of premium products ensures that your furry
+              friends receive the care they deserve.
+            </p>
+            <a href="./about" class="text-accent font-semibold hover:underline">Learn More About Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Subscription Box Section -->
-    <section id="subscription" class="bg-gray-100 py-16">
+    <section id="subscription" class="bg-white py-16">
       <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center">
           <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-            <h2 class="text-3xl font-bold mb-4">Pawsome Box Subscription</h2>
+            <h2 class="text-4xl md:text-5xl font-light mb-4 font-chewy">Pawsome Box Subscription</h2>
             <p class="text-xl mb-6 text-gray-600">
               Get a curated box of premium pet essentials delivered to your
               doorstep every month.
@@ -97,7 +97,7 @@
                 Grooming supplies and accessories
               </li>
             </ul>
-            <a href="#"
+            <a href="./subscription"
               class="bg-accent text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300">Subscribe
               Now</a>
           </div>
@@ -110,32 +110,12 @@
       </div>
     </section>
 
-    <!-- About Us Section -->
-    <section class="bg-white py-16">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center gap-4">
-          <div class="md:w-1/2">
-            <img
-              src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1586&q=80"
-              alt="Happy pets" class="rounded-lg shadow-lg" />
-          </div>
-          <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
-            <h2 class="text-3xl font-bold mb-4">About Pawsome</h2>
-            <p class="text-xl mb-6 text-gray-600">
-              We're passionate about providing the best for your pets. Our
-              curated selection of premium products ensures that your furry
-              friends receive the care they deserve.
-            </p>
-            <a href="./about" class="text-accent font-semibold hover:underline">Learn More About Us</a>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- Testimonials -->
     <section class="py-16 bg-gray-100">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-12 text-center">
+        <h2 class="text-3xl md:text-5xl font-light mb-12 text-center font-chewy">
           What Our Customers Say
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -188,8 +168,10 @@
     <!-- Newsletter Signup -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-6">Have Questions?</h2>
-        <p class="text-xl text-gray-600 mb-8">We'd love to hear from you and help you find the perfect products for
+        <h2 class="text-3xl md:text-5xl font-extralight font-chewy mb-6">Have Questions?</h2>
+        <p class="text-xl md:text-3xl text-gray-600 mb-8 font-chewy">We'd love to hear from you and help you find the
+          perfect
+          products for
           your pets.</p>
         <a href="/contact"
           class="inline-block bg-[#FF9800] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300">Contact
