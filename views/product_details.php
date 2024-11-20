@@ -84,6 +84,12 @@ if (!$productFound) {
                             class="inline-block px-3 py-1 mb-4 text-sm font-semibold rounded-full <?php echo $in_stock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'; ?>">
                             <?php echo $in_stock ? 'In Stock' : 'Out of Stock'; ?>
                         </span>
+                        <?php if ($stock_qty < 20 && $in_stock): ?>
+                            <span
+                                class="inline-block px-3 py-1 mb-4 ml-2 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full">
+                                Low Stock - Hurry Up! Only <?php echo $stock_qty; ?> left
+                            </span>
+                        <?php endif; ?>
                     </p>
                     <div class="mb-6">
                         <h2 class="font-semibold mb-2">Size</h2>
@@ -102,12 +108,15 @@ if (!$productFound) {
                     <div class="mb-6">
                         <h2 class="font-semibold mb-2">Quantity</h2>
                         <div class="flex items-center space-x-4">
-                            <button id="decrease-quantity"
-                                class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary">-</button>
-                            <span id="quantity" class="text-xl font-semibold">1</span>
-                            <button id="increase-quantity"
-                                class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary">+</button>
+                            <button id="decrease-quantity" <?php echo !$in_stock ? 'disabled' : ''; ?>
+                                class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary <?php echo !$in_stock ? 'opacity-50 cursor-not-allowed' : ''; ?>">-</button>
+                            <span id="quantity" class="text-xl font-semibold"><?php echo !$in_stock ? '0' : '1'; ?></span>
+                            <button id="increase-quantity" <?php echo !$in_stock ? 'disabled' : ''; ?>
+                                class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary <?php echo !$in_stock ? 'opacity-50 cursor-not-allowed' : ''; ?>">+</button>
                         </div>
+                        <?php if ($in_stock): ?>
+                            <input type="hidden" id="max-quantity" value="<?php echo $stock_qty; ?>">
+                        <?php endif; ?>
                     </div>
                     <button
                         class="w-full bg-primary text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Add
@@ -137,17 +146,27 @@ if (!$productFound) {
         const decreaseButton = document.getElementById('decrease-quantity');
         const increaseButton = document.getElementById('increase-quantity');
         const quantityElement = document.getElementById('quantity');
+        const currentStockQty = <?php echo $stock_qty; ?>;
+        console.log(currentStockQty);
+
         let quantity = 1;
         decreaseButton.addEventListener('click', () => {
             if (quantity > 1) {
                 quantity--;
                 quantityElement.textContent = quantity;
+                increaseButton.disabled = false;
             }
         });
         increaseButton.addEventListener('click', () => {
-            quantity++;
-            quantityElement.textContent = quantity;
+            if (quantity < currentStockQty) {
+                quantity++;
+                quantityElement.textContent = quantity;
+                if (quantity >= currentStockQty) {
+                    increaseButton.disabled = true;
+                }
+            }
         });
+
         // Thumbnail image click handlers
         const mainImage = document.getElementById('main-image');
         const thumbnails = document.querySelectorAll('.thumbnail');
