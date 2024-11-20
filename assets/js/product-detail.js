@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM Content Loaded')
 
   // Mobile menu functionality
-  initializeMobileMenu()
 
   // Quantity controls
   initializeQuantityControls()

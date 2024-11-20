@@ -140,25 +140,7 @@ $products = fetchProducts();
 
   <?php require 'partials/footer.php'; ?>
 
-  <script>
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
 
-    mobileMenuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener("click", (event) => {
-      if (
-        !mobileMenuButton.contains(event.target) &&
-        !mobileMenu.contains(event.target)
-      ) {
-        mobileMenu.classList.add("hidden");
-      }
-    });
-  </script>
 </body>
 
 </html>

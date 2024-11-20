@@ -45,7 +45,9 @@ if (!$productFound) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $productFound ? $title : 'Product Not Found'; ?></title>
+    <title>
+        <?php echo $productFound ? $title . ' | Pawsome Pet Supplies' : 'Product Not Found | Pawsome Pet Supplies'; ?>
+    </title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/styles.css" rel="stylesheet">
 </head>

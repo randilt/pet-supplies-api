@@ -264,7 +264,7 @@
     </section>
 
     <!-- Newsletter Signup -->
-    <section class="bg-primary text-white py-16">
+    <section class="bg-gray-500 text-white py-16">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
         <p class="text-xl mb-8">
@@ -274,7 +274,7 @@
           <input type="email" placeholder="Enter your email"
             class="flex-grow px-4 py-2 rounded-l-full focus:outline-none text-gray-900" />
           <button type="submit"
-            class="bg-accent text-white px-6 py-2 rounded-r-full hover:bg-opacity-90 transition duration-300">
+            class="bg-accent md:flex text-white te px-6 py-2 rounded-r-full hover:bg-opacity-90 transition duration-300">
             Subscribe
           </button>
         </form>
@@ -283,24 +283,8 @@
   </main>
 
   <?php require 'partials/footer.php'; ?>
-  <script>
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
+  <script src="assets/js/product-detail.js">
 
-    mobileMenuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener("click", (event) => {
-      if (
-        !mobileMenuButton.contains(event.target) &&
-        !mobileMenu.contains(event.target)
-      ) {
-        mobileMenu.classList.add("hidden");
-      }
-    });
   </script>
 </body>
 
