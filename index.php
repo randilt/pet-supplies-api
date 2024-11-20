@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL', '/pet-supplies-store-api');
+define('BASE_URL', '/pawsome');
 $routes = [
     "/" => "views/home.php",
     "/products" => "views/products_page.php",
