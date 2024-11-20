@@ -285,6 +285,7 @@
   <?php require 'partials/footer.php'; ?>
   <script src="assets/js/product-detail.js">
 
+
   </script>
 </body>
 

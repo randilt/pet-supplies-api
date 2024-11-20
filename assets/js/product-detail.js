@@ -2,27 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM Content Loaded')
-
-  // Mobile menu functionality
-
   // Quantity controls
   initializeQuantityControls()
-
   // Thumbnail functionality
   initializeThumbnails()
 })
-
-function initializeMobileMenu() {
-  const mobileMenuButton = document.getElementById('mobile-menu-button')
-  const mobileMenu = document.getElementById('mobile-menu')
-
-  if (mobileMenuButton && mobileMenu) {
-    console.log('Mobile menu elements found')
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden')
-    })
-  }
-}
 
 function initializeQuantityControls() {
   const decreaseButton = document.getElementById('decrease-quantity')
