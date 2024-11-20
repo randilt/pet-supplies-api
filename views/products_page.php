@@ -35,7 +35,7 @@ $categories = fetchCategories();
 
     <div class="flex flex-col md:flex-row gap-8">
       <!-- Filters Column -->
-      <?php require 'partials/filter_form.php'; ?>
+      <?php require 'partials/products_filter_form.php'; ?>
       <!-- Products Column -->
       <div class="md:w-3/4">
         <!-- Sort and Limit Options -->
