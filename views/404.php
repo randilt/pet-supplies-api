@@ -11,7 +11,7 @@
 <body>
     <?php require 'partials/navbar.php'; ?>
 
-    <div class="text-center py-16">
+    <div class="text-center py-16 min-h-screen flex items-center justify-center flex-col">
         <h1 class="text-4xl font-bold mb-4">404 - Page Not Found</h1>
         <p class="text-xl text-gray-600 mb-8">We're sorry, but the page you're looking for doesn't exist or has
             been removed.</p>
