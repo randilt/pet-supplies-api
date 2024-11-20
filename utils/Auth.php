@@ -1,45 +1,53 @@
 <?php
-class Auth {
+class Auth
+{
     private $db;
     private $sessionStarted = false;
 
-    public function __construct(Database $db) {
+    public function __construct(Database $db)
+    {
         $this->db = $db;
         $this->startSession();
     }
 
-    private function startSession() {
+    private function startSession()
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
             $this->sessionStarted = true;
         }
     }
 
-    public function isAuthenticated() {
+    public function isAuthenticated()
+    {
         return isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return isset($_SESSION['admin_id']);
     }
 
-    public function requireAuth() {
+    public function requireAuth()
+    {
         if (!$this->isAuthenticated()) {
             Response::json(['error' => 'Unauthorized access'], 401);
             exit;
         }
     }
 
-    public function requireAdmin() {
+    public function requireAdmin()
+    {
         if (!$this->isAdmin()) {
             Response::json(['error' => 'Admin access required'], 403);
             exit;
         }
     }
 
-    public function loginAdmin($email, $password) {
+    public function loginAdmin($email, $password)
+    {
         $conn = $this->db->getConnection();
-        
+
         $stmt = $conn->prepare("SELECT id, password FROM admins WHERE email = ?");
         $stmt->execute([$email]);
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -52,9 +60,10 @@ class Auth {
         return true;
     }
 
-    public function loginUser($email, $password) {
+    public function loginUser($email, $password)
+    {
         $conn = $this->db->getConnection();
-        
+
         $stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -67,7 +76,8 @@ class Auth {
         return true;
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
         $this->sessionStarted = false;
     }

@@ -16,20 +16,20 @@
   <?php require 'partials/navbar.php'; ?>
   <main>
     <!-- Hero Section with Subscription Box Promotion -->
-    <section class="bg-primary text-white py-24 relative">
+    <section class="bg-primary text-white py-8 relative">
       <!-- Background image with overlay -->
       <div class="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1586&q=80"
           alt="Happy pets background" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-primary/70"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
       </div>
 
       <!-- Content -->
       <div class="container mx-auto px-4 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-12 items-center">
           <!-- Main Hero Content -->
-          <div class="text-center md:text-left space-y-6">
+          <div class="text-center md:text-left space-y-3">
             <h1 class="text-4xl md:text-6xl font-bold leading-tight">
               Elevate Your Pet's Lifestyle
             </h1>
@@ -37,14 +37,14 @@
               Discover premium pet supplies tailored for your furry friends
             </p>
             <div class="pt-4">
-              <a href="#"
+              <a href="./products"
                 class="bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Shop
                 Now</a>
             </div>
           </div>
 
           <!-- Subscription Promo Card -->
-          <div class="bg-white/30 backdrop-blur-lg rounded-2xl p-8 text-center space-y-4">
+          <!-- <div class="bg-white/30 backdrop-blur-lg rounded-2xl p-8 text-center space-y-4">
             <span class="text-white font-semibold text-sm uppercase tracking-wider">
               Special Offer
             </span>
@@ -59,91 +59,13 @@
                 class="bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-accent/80 transition duration-300 inline-block">Learn
                 More</a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
 
-    <!-- Featured Products -->
-    <section class="py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center">Trending Products</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Product Card 1 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
-            <img
-              src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt="Dog food" class="w-full h-48 object-cover" />
-            <div class="p-4">
-              <h3 class="text-xl font-semibold mb-2">Organic Dog Food</h3>
-              <p class="text-gray-600 mb-4">
-                Nutritious meals for your canine companion
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-primary">$24.99</span>
-                <button class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 2 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
-            <img
-              src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt="Cat toy" class="w-full h-48 object-cover" />
-            <div class="p-4">
-              <h3 class="text-xl font-semibold mb-2">Interactive Cat Toy</h3>
-              <p class="text-gray-600 mb-4">
-                Engaging playtime for feline friends
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-primary">$12.99</span>
-                <button class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 3 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
-            <img
-              src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt="Dog leash" class="w-full h-48 object-cover" />
-            <div class="p-4">
-              <h3 class="text-xl font-semibold mb-2">Eco-Friendly Leash</h3>
-              <p class="text-gray-600 mb-4">
-                Sustainable and durable for daily walks
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-primary">$19.99</span>
-                <button class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 4 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
-            <img
-              src="https://images.unsplash.com/photo-1585499583264-091a8a122461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt="Pet bed" class="w-full h-48 object-cover" />
-            <div class="p-4">
-              <h3 class="text-xl font-semibold mb-2">Orthopedic Pet Bed</h3>
-              <p class="text-gray-600 mb-4">
-                Comfort and support for restful sleep
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-primary">$34.99</span>
-                <button class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Recent Products -->
+    <?php require 'partials/recent_products.php'; ?>
 
     <!-- Subscription Box Section -->
     <section id="subscription" class="bg-gray-100 py-16">
@@ -204,7 +126,7 @@
               curated selection of premium products ensures that your furry
               friends receive the care they deserve.
             </p>
-            <a href="#" class="text-accent font-semibold hover:underline">Learn More About Us</a>
+            <a href="./about" class="text-accent font-semibold hover:underline">Learn More About Us</a>
           </div>
         </div>
       </div>
@@ -264,20 +186,14 @@
     </section>
 
     <!-- Newsletter Signup -->
-    <section class="bg-gray-500 text-white py-16">
+    <section class="py-16 bg-white">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
-        <p class="text-xl mb-8">
-          Subscribe to our newsletter for exclusive offers and pet care tips
-        </p>
-        <form class="max-w-md mx-auto flex">
-          <input type="email" placeholder="Enter your email"
-            class="flex-grow px-4 py-2 rounded-l-full focus:outline-none text-gray-900" />
-          <button type="submit"
-            class="bg-accent md:flex text-white te px-6 py-2 rounded-r-full hover:bg-opacity-90 transition duration-300">
-            Subscribe
-          </button>
-        </form>
+        <h2 class="text-3xl font-bold mb-6">Have Questions?</h2>
+        <p class="text-xl text-gray-600 mb-8">We'd love to hear from you and help you find the perfect products for
+          your pets.</p>
+        <a href="/contact"
+          class="inline-block bg-[#FF9800] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300">Contact
+          Us</a>
       </div>
     </section>
   </main>

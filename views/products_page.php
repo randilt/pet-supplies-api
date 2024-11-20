@@ -40,14 +40,8 @@ $categories = fetchCategories();
       <div class="md:w-3/4">
         <!-- Sort and Limit Options -->
         <?php require 'partials/products_sort_limit.php'; ?>
-
-
-
         <!-- Products Grid -->
         <?php require_once 'partials/product_card_grid.php'; ?>
-
-
-
         <!-- Pagination -->
         <?php require 'partials/pagination.php'; ?>
       </div>
