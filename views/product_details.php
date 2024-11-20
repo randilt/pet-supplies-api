@@ -43,10 +43,15 @@ if (!$productFound) {
 <html lang="en">
 
 <?php
+// if ($productFound) {
+//     $title = $title . ' | Pawsome | Premium Pet Supplies</title>';
+// } else {
+//     $title = 'Product Not Found | Pawsome | Premium Pet Supplies';
+// }
 if ($productFound) {
-    $title = $title . ' | Pawsome | Premium Pet Supplies</title>';
+    echo '<title>' . $title . ' | Pawsome | Premium Pet Supplies</title>';
 } else {
-    $title = 'Product Not Found | Pawsome | Premium Pet Supplies';
+    echo 'Product Not Found | Pawsome | Premium Pet Supplies</title>';
 }
 require 'partials/header.php';
 
