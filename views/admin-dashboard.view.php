@@ -5,6 +5,11 @@ require_once dirname(__DIR__) . '/utils/Auth.php';
 require_once dirname(__DIR__) . '/config/database.php';
 require_once dirname(__DIR__) . '/functions.php';
 
+$currTab = isset($_GET['tab']) ? strval($_GET['tab']) : null;
+
+
+
+
 $db = new Database();
 $auth = new Auth($db);
 
@@ -52,10 +57,13 @@ $productsFrom5000 = $productsFrom5000['pagination']['total'];
     <title>Pawsome Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="../assets/css/styles.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-nunito">
     <div class="flex h-screen">
         <!-- Sidebar -->
         <?php include 'partials/adminDashboard/sidebar.php'; ?>
@@ -69,26 +77,53 @@ $productsFrom5000 = $productsFrom5000['pagination']['total'];
                 data-from601to800="<?php echo $productsFrom601to800; ?>" data-from2000to5000="<?php echo $productsFrom2000to5000; ?>
                 " data-from5000="<?php echo $productsFrom5000; ?>
                 "></div>
+            <div class="flex justify-between items-center mb-8">
 
-            <h1 class="text-3xl font-bold mb-8">Welcome to Admin Dashboard</h1>
-
-            <!-- Statistics -->
-            <?php include 'partials/adminDashboard/dashboard_stats.php'; ?>
-
-            <!-- Chart -->
-            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                <h3 class="text-xl font-semibold mb-4">Price Distribution</h3>
-                <canvas id="priceChart"></canvas>
+                <h1 class="text-3xl font-bold">Welcome to Admin Dashboard</h1>
+                <a href="../" class="underline">Back to home</a>
             </div>
+            <?php
 
-            <!-- Forms -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Add Product Form -->
-                <?php include 'partials/adminDashboard/add_product_form.php'; ?>
+            switch ($currTab) {
+                case 'statistics':
+                case '':
+                    ?>
+                    <!-- Home Content -->
 
-                <!-- Add Category Form -->
-                <?php include 'partials/adminDashboard/add_category_form.php'; ?>
-            </div>
+                    <!-- Statistics -->
+                    <?php include 'partials/adminDashboard/dashboard_stats.php'; ?>
+                    <!-- Chart -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Price Distribution</h3>
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                    <?php
+                    break;
+                case 'products':
+                    ?>
+                    <!-- Add Product Form -->
+                    <?php include 'partials/adminDashboard/add_product_form.php'; ?>
+                    <?php
+                    break;
+
+                case 'categories':
+                    ?>
+                    <!-- Add Category Form -->
+                    <?php include 'partials/adminDashboard/add_category_form.php'; ?>
+                    <?php
+                    break;
+
+                default:
+                    ?>
+                    <!-- Default Content -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Under Development</h3>
+                        <p>This is the default content.</p>
+                    </div>
+                    <?php
+                    break;
+            }
+            ?>
         </div>
     </div>
 

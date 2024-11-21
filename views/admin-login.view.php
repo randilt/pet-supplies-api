@@ -34,9 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Pawsome Admin Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="../assets/css/styles.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <style>
         body {
-            font-family: 'Nunito', sans-serif;
+
             background-image: url('https://images.unsplash.com/photo-1615789591457-74a63395c990?auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
@@ -44,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center bg-gray-100">
+<body class="min-h-screen font-nunito flex items-center justify-center bg-gray-100">
     <div class="bg-white p-8 rounded-lg shadow-md w-96 max-w-full">
         <div class="text-center mb-8">
-            <img src="/placeholder.svg?height=80&width=80" alt="Pawsome Logo" class="mx-auto mb-4 w-20 h-20">
-            <h1 class="text-3xl font-bold text-[#FF9800]">Pawsome Admin</h1>
+
+            <h1 class="text-5xl text-gray-800 font-chewy">Pawsome Admin</h1>
         </div>
 
         <?php if (isset($error)): ?>
@@ -74,9 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
         </form>
 
-        <div class="mt-6 text-center">
-            <a href="#" class="text-sm text-[#FF9800] hover:underline">Forgot password?</a>
-        </div>
+
 
         <div class="mt-8 text-center text-sm text-gray-500">
             <p>Pawsome Pet Supplies &copy; <?php echo date('Y'); ?></p>
