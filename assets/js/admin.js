@@ -11,13 +11,32 @@ document.addEventListener('DOMContentLoaded', function () {
   var dataFrom601to800 = parseInt(
     priceChartStats.getAttribute('data-from601to800')
   )
-  var dataFrom2000 = parseInt(priceChartStats.getAttribute('data-from2000'))
+  var dataFrom2000to5000 = parseInt(
+    priceChartStats.getAttribute('data-from2000to5000')
+  )
+  var dataFrom5000 = parseInt(priceChartStats.getAttribute('data-from5000'))
+
+  console.log(
+    dataFrom0to200,
+    dataFrom201to400,
+    dataFrom401to600,
+    dataFrom601to800,
+    dataFrom2000to5000,
+    dataFrom5000
+  )
 
   var ctx = document.getElementById('priceChart').getContext('2d')
   var chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['$0-$200', '$201-$400', '$401-$600', '$601-$800', '$2000+'],
+      labels: [
+        '$0-$200',
+        '$201-$400',
+        '$401-$600',
+        '$601-$800',
+        '$2000-$5000',
+        '$5000+',
+      ],
       datasets: [
         {
           label: 'Number of Products',
@@ -26,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dataFrom201to400,
             dataFrom401to600,
             dataFrom601to800,
-            dataFrom2000,
+            dataFrom2000to5000,
+            dataFrom5000,
           ],
           backgroundColor: '#FF9800',
         },
