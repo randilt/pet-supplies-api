@@ -10,13 +10,13 @@
         </div>
         <div class="mb-4">
             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Short
-                Description</label>
+                Description (10 - 255 Characters)</label>
             <textarea id="description" name="description" required maxlength="255"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]"></textarea>
         </div>
         <div class="mb-4">
             <label for="long_description" class="block text-sm font-medium text-gray-700 mb-1">Long
-                Description</label>
+                Description (Min 50 Characters)</label>
             <textarea id="long_description" name="long_description" required
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]"></textarea>
         </div>
