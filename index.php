@@ -1,10 +1,10 @@
 <?php
 define('BASE_URL', '/pawsome');
 $routes = [
-    "/" => "views/home.php",
-    "/products" => "views/products_page.php",
-    "/product" => "views/product_details.php",
-    "/about" => "views/about.php",
+    "/" => "views/home.view.php",
+    "/products" => "views/products_page.view.php",
+    "/product" => "views/product_details.view.php",
+    "/about" => "views/about.view.php",
     "/contact" => "views/contact.view.php",
     "/subscription" => "views/subscription.view.php",
     "/admin/login" => "views/admin-login.view.php",
