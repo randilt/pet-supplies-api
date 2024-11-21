@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         alert('Product added successfully')
         productForm.reset()
+        location.reload()
 
         console.log('Product added:', data)
       } catch (error) {
