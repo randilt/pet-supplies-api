@@ -3,10 +3,12 @@ class Auth
 {
     private $db;
     private $sessionStarted = false;
+    private $isApi = false;
 
-    public function __construct(Database $db)
+    public function __construct(Database $db, $isApi = false)
     {
         $this->db = $db;
+        $this->isApi = $isApi;
         $this->startSession();
     }
 
@@ -28,18 +30,44 @@ class Auth
         return isset($_SESSION['admin_id']);
     }
 
-    public function requireAuth()
+    public function requireAuth($redirectUrl = './login')
     {
         if (!$this->isAuthenticated()) {
-            Response::json(['error' => 'Unauthorized access'], 401);
+            if ($this->isApi) {
+                Response::json(['error' => 'Unauthorized access'], 401);
+                exit;
+            } else {
+                header("Location: $redirectUrl");
+                exit;
+            }
+        }
+    }
+
+    public function requireAdmin($redirectUrl = './login')
+    {
+        if (!$this->isAdmin()) {
+            if ($this->isApi) {
+                Response::json(['error' => 'Admin access required'], 403);
+                exit;
+            } else {
+                header("Location: $redirectUrl");
+                exit;
+            }
+        }
+    }
+
+    public function requireGuest($redirectUrl = './dashboard')
+    {
+        if ($this->isAuthenticated()) {
+            header("Location: $redirectUrl");
             exit;
         }
     }
 
-    public function requireAdmin()
+    public function requireAdminGuest($redirectUrl = './dashboard')
     {
-        if (!$this->isAdmin()) {
-            Response::json(['error' => 'Admin access required'], 403);
+        if ($this->isAdmin()) {
+            header("Location: $redirectUrl");
             exit;
         }
     }
@@ -76,9 +104,14 @@ class Auth
         return true;
     }
 
-    public function logout()
+    public function logout($redirectUrl = './')
     {
         session_destroy();
         $this->sessionStarted = false;
+
+        if (!$this->isApi) {
+            header("Location: $redirectUrl");
+            exit;
+        }
     }
 }

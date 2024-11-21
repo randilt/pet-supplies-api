@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require 'partials/header.php'; ?>
+
+
+<?php $title = "404 | Pawsome | Premium Pet Supplies";
+require 'partials/header.php'; ?>
 
 <body class="font-nunito">
     <?php require 'partials/navbar.php'; ?>

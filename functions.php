@@ -1,6 +1,6 @@
 <?php
 
-function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20)
+function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20, $isAdmin = false)
 {
     $queryParams = array('limit' => $limit);
 
@@ -43,9 +43,11 @@ function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $
         throw new Exception('Failed to parse JSON: ' . json_last_error_msg());
     }
 
+    if ($isAdmin) {
+        return $data;
+    }
     return $data['products'] ?? [];
 }
-
 
 function fetchProductsById($id)
 {
@@ -53,20 +55,15 @@ function fetchProductsById($id)
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('
-    Content-Type: application/json'
-    ));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     $response = curl_exec($ch);
     if (curl_errno($ch)) {
-
         $error = 'Curl error' . curl_error($ch);
         curl_close($ch);
         throw new Exception($error);
     }
     return $response ?? null;
-
 }
-
 
 function fetchCategories()
 {
@@ -95,3 +92,53 @@ function fetchCategories()
 
     return $data['categories'] ?? [];
 }
+
+function handleLogout()
+{
+    // Only process POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header('Location: ./dashboard.php');
+        exit;
+    }
+
+    // Clear all session data
+    $_SESSION = array();
+
+    // Destroy the session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 3600, '/');
+    }
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to login page
+    header('Location: ./login');
+    exit;
+}
+
+// Function to process the logout API call
+function logoutUser()
+{
+    $apiUrl = 'http://localhost/pawsome/api/auth/logout.php';
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiUrl);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        $error = 'Curl error: ' . curl_error($ch);
+        curl_close($ch);
+        throw new Exception($error);
+    }
+
+    curl_close($ch);
+
+    return json_decode($response, true);
+}
+
+
