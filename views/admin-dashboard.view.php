@@ -23,6 +23,22 @@ $stats = $products['stats'];
 // Fetch categories for the product form
 $categories = fetchCategories();
 
+$productsFrom0to200 = fetchProducts(0, 200, null, null, 20, true);
+$productsFrom201to400 = fetchProducts(201, 500, null, null, 20, true);
+$productsFrom401to600 = fetchProducts(501, 1000, null, null, 20, true);
+$productsFrom601to800 = fetchProducts(1001, 2000, null, null, 20, true);
+$productsFrom2000 = fetchProducts(2000, null, null, null, 20, true);
+
+
+$productsFrom0to200 = $productsFrom0to200['pagination']['total'];
+$productsFrom201to400 = $productsFrom201to400['pagination']['total'];
+$productsFrom401to600 = $productsFrom401to600['pagination']['total'];
+$productsFrom601to800 = $productsFrom601to800['pagination']['total'];
+$productsFrom2000 = $productsFrom2000['pagination']['total'];
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +60,12 @@ $categories = fetchCategories();
 
         <!-- Main Content -->
         <div class="flex-1 overflow-y-auto p-8">
+            <!-- a hidden element to pass the data attributes for the chart -->
+            <div id="priceChartStats" data-from0to200="<?php echo $productsFrom0to200; ?>"
+                data-from201to400="<?php echo $productsFrom201to400; ?>"
+                data-from401to600="<?php echo $productsFrom401to600; ?>"
+                data-from601to800="<?php echo $productsFrom601to800; ?>"
+                data-from2000="<?php echo $productsFrom2000; ?>"></div>
 
             <h1 class="text-3xl font-bold mb-8">Welcome to Admin Dashboard</h1>
 

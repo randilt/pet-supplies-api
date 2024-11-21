@@ -12,6 +12,6 @@
     <form method="POST" class="mt-auto">
         <input type="hidden" name="action" value="logout">
         <button type="submit"
-            class="w-full bg-[#F57C00] text-white py-2 px-4 rounded-md hover:bg-[#E65100] transition duration-300">Logout</button>
+            class="w-full bg-primary text-white py-2 px-4 rounded-md  transition duration-300">Logout</button>
     </form>
 </div>

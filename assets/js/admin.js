@@ -1,14 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Price distribution chart
+  var priceChartStats = document.getElementById('priceChartStats')
+  var dataFrom0to200 = parseInt(priceChartStats.getAttribute('data-from0to200'))
+  var dataFrom201to400 = parseInt(
+    priceChartStats.getAttribute('data-from201to400')
+  )
+  var dataFrom401to600 = parseInt(
+    priceChartStats.getAttribute('data-from401to600')
+  )
+  var dataFrom601to800 = parseInt(
+    priceChartStats.getAttribute('data-from601to800')
+  )
+  var dataFrom2000 = parseInt(priceChartStats.getAttribute('data-from2000'))
+
   var ctx = document.getElementById('priceChart').getContext('2d')
   var chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['$0-$50', '$51-$100', '$101-$500', '$501-$1000', '$1000+'],
+      labels: ['$0-$200', '$201-$400', '$401-$600', '$601-$800', '$2000+'],
       datasets: [
         {
           label: 'Number of Products',
-          data: [2, 1, 1, 1, 1], // Replace with actual data
+          data: [
+            dataFrom0to200,
+            dataFrom201to400,
+            dataFrom401to600,
+            dataFrom601to800,
+            dataFrom2000,
+          ],
           backgroundColor: '#FF9800',
         },
       ],
