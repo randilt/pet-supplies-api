@@ -66,7 +66,7 @@ require 'partials/header.php';
                 <div class="md:w-1/2">
                     <div class="mb-4">
                         <img id="main-image" src="<?= htmlspecialchars($img_url, ENT_QUOTES, 'UTF-8') ?>"
-                            alt="Premium Dog Food" class="w-full h-96 object-cover rounded-lg">
+                            alt="Premium Dog Food" class="w-full h-[28rem] object-cover rounded-lg">
                     </div>
                     <!-- <div class="flex space-x-4">
                         <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
