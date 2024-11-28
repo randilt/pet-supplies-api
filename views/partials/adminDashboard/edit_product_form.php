@@ -104,47 +104,7 @@ $categories = fetchCategories();
         </div>
     </div>
 
-    <script>
-        document.getElementById('editProductForm').onsubmit = async function (e) {
-            e.preventDefault();
 
-            const formData = new FormData(this);
-            const productData = {
-                category_id: parseInt(formData.get('category_id')),
-                name: formData.get('name'),
-                description: formData.get('description'),
-                long_description: formData.get('long_description'),
-                price: parseFloat(formData.get('price')),
-                stock_quantity: parseInt(formData.get('stock_quantity')),
-                image_url: formData.get('image_url') || null,
-            };
-
-            try {
-                const response = await fetch(
-                    `http://localhost/pawsome/api/products/update_product.php?id=${formData.get('product_id')}`,
-                    {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(productData),
-                    }
-                );
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to update product');
-                }
-
-                alert('Product updated successfully');
-                window.location.href = './dashboard?tab=products';
-            } catch (error) {
-                alert('Error: ' + error.message);
-                console.error('Error:', error);
-            }
-        };
-    </script>
 </body>
 
 </html>
