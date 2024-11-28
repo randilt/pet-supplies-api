@@ -115,6 +115,8 @@ $productsFrom5000 = $productsFrom5000['pagination']['total'];
 
                     case 'categories':
                         ?>
+                        <!-- Categories table -->
+                        <?php include 'partials/adminDashboard/categories_table.php'; ?>
                         <!-- Add Category Form -->
                         <?php include 'partials/adminDashboard/add_category_form.php'; ?>
                         <?php
