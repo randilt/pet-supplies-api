@@ -42,9 +42,8 @@
             </select>
         </div>
         <div class="mb-4">
-            <label for="product_image" class="block text-sm font-medium text-gray-700 mb-1">Product
-                Image</label>
-            <input type="file" id="product_image" name="product_image" accept="image/*"
+            <label for="image_url" class="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+            <input type="url" id="image_url" name="image_url"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]">
         </div>
         <button type="submit"

@@ -83,14 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
         long_description: formData.get('long_description'),
         price: parseFloat(formData.get('price')),
         stock_quantity: parseInt(formData.get('stock_quantity')),
+        image_url: formData.get('image_url') || null,
       }
 
       try {
-        const imageFile = formData.get('product_image')
-        if (imageFile && imageFile.size > 0) {
-          // have to handle image upload
-        }
-
         // Make the API call with JSON data
         const response = await fetch(
           'http://localhost/pawsome/api/products/add_product.php',
@@ -110,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data.error || data.errors?.join(', ') || 'Failed to add product'
           )
         }
+        console.log(data)
 
         alert('Product added successfully')
         productForm.reset()
