@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
 try {
     $db = new Database();
     $auth = new Auth($db);
+    $auth->requireAuth();
+    $auth->requireAdmin();
 
     // Get category ID from query parameters
     $categoryId = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -21,26 +23,39 @@ try {
 
     $conn = $db->getConnection();
 
-    // Prepare SQL to delete category
+    // First check if there are any products using this category
+    $checkQuery = "SELECT COUNT(*) FROM products WHERE category_id = :id";
+    $checkStmt = $conn->prepare($checkQuery);
+    $checkStmt->bindParam(':id', $categoryId, PDO::PARAM_INT);
+    $checkStmt->execute();
+
+    $productCount = $checkStmt->fetchColumn();
+    if ($productCount > 0) {
+        Response::json([
+            'success' => false,
+            'error' => 'Cannot delete category',
+            'message' => "This category already contains {$productCount} product(s). Please remove or reassign these products before deleting the category."
+        ], 409);
+    }
+
+    // If no products found, proceed with deletion
     $query = "DELETE FROM categories WHERE id = :id";
     $stmt = $conn->prepare($query);
-
-    // Bind parameters
     $stmt->bindParam(':id', $categoryId, PDO::PARAM_INT);
 
-    // Execute and return result
     if ($stmt->execute()) {
         if ($stmt->rowCount() > 0) {
             Response::json([
+                'success' => true,
                 'message' => 'Category deleted successfully',
                 'categoryId' => $categoryId
             ]);
         } else {
-            Response::json(['error' => 'Category not found'], 404);
+            Response::json(['success' => false, 'error' => 'Category not found'], 404);
         }
     } else {
-        Response::json(['error' => 'Failed to delete category'], 500);
+        Response::json(['success' => false, 'error' => 'Failed to delete category'], 500);
     }
 } catch (Exception $e) {
-    Response::json(['error' => $e->getMessage()], 500);
+    Response::json(['success' => false, 'error' => $e->getMessage()], 500);
 }

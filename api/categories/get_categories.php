@@ -2,7 +2,7 @@
 require_once '../../config/database.php';
 require_once '../../utils/Response.php';
 require_once '../../utils/Database.php';
-require_once '../../utils/Auth.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     Response::json(['error' => 'Method not allowed'], 405);
@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 try {
     $db = new Database();
-    $auth = new Auth($db);
 
     $conn = $db->getConnection();
 

@@ -29,8 +29,8 @@ $categories = fetchCategories();
                             <td class="py-2 px-4 border-b"><?= htmlspecialchars($category['description'] ?? 'N/A') ?></td>
                             <td class="py-2 px-4 border-b"><?= $category['created_at'] ?? 'N/A' ?></td>
                             <td class="py-2 px-4 border-b">
-                                <a href="./dashboard?action=edit_category&id=<?= $category['id'] ?>"
-                                    class="text-blue-500 hover:underline mr-2">Edit</a>
+                                <!-- <a href="./dashboard?action=edit_category&id=<?= $category['id'] ?>"
+                                    class="text-blue-500 hover:underline mr-2">Edit</a> -->
                                 <button onclick="deleteCategory(<?= $category['id'] ?>)"
                                     class="text-red-500 hover:underline">Delete</button>
                             </td>
@@ -42,24 +42,46 @@ $categories = fetchCategories();
     </div>
     <script>
         function deleteCategory(categoryId) {
-            if (confirm('Are you sure you want to delete this category?')) {
-                fetch(`http://localhost/pawsome/api/categories/delete_category.php?id=${categoryId}`, { method: 'DELETE' })
-                    .then(response => {
-                        response.json();
-                        console.log(response)
-                        if (response.status === 200) {
-                            alert('Category deleted successfully.');
-                            location.reload();
-                        } else {
-                            alert('Failed to delete the category. Please try again.');
-                        }
-                    }
-                    )
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while deleting the category.');
-                    });
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`http://localhost/pawsome/api/categories/delete_category.php?id=${categoryId}`, { method: 'DELETE' })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.success) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Category has been deleted.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    data.message || 'Failed to delete category',
+                                    'error'
+                                );
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire(
+                                'Error!',
+                                'An error occurred while deleting the category.',
+                                'error'
+                            );
+                        });
+                }
+            });
         }
     </script>
 </div>
