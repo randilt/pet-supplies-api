@@ -9,7 +9,9 @@ $products = fetchProducts(
   $maxPrice,
   $categoryId,
   $searchQuery,
-  20
+  isset($_GET['limit']) ? intval($_GET['limit']) : 12,
+  false,
+  isset($_GET['page']) ? intval($_GET['page']) : null
 );
 
 $categories = fetchCategories();

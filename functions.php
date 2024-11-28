@@ -1,8 +1,12 @@
 <?php
 
-function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20, $isAdmin = false)
+function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20, $isAdmin = false, $page = null)
 {
     $queryParams = array('limit' => $limit);
+
+    if ($page !== null) {
+        $queryParams['page'] = $page;
+    }
 
     if ($minPrice !== null) {
         $queryParams['min_price'] = $minPrice;

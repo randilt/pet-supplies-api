@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (category !== '') params.append('category_id', category)
     if (minPrice !== '') params.append('min_price', minPrice)
     if (maxPrice !== '') params.append('max_price', maxPrice)
+    params.append('page', 1)
 
     window.location.href = `http://localhost/pawsome/products?${params.toString()}`
   })
