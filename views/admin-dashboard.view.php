@@ -6,7 +6,8 @@ require_once dirname(__DIR__) . '/config/database.php';
 require_once dirname(__DIR__) . '/functions.php';
 
 $currTab = isset($_GET['tab']) ? strval($_GET['tab']) : null;
-
+$action = isset($_GET['action']) ? $_GET['action'] : null;
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
 
 
 
@@ -84,48 +85,54 @@ $productsFrom5000 = $productsFrom5000['pagination']['total'];
             </div>
             <?php
 
-            switch ($currTab) {
-                case 'statistics':
-                case '':
-                    ?>
-                    <!-- Home Content -->
+            if ($currTab === 'editing' && $action === "edit" && $id !== null) {
+                include 'partials/adminDashboard/edit_product_form.php';
+            } else {
+                switch ($currTab) {
+                    case 'statistics':
+                    case '':
+                        ?>
+                        <!-- Home Content -->
 
-                    <!-- Statistics -->
-                    <?php include 'partials/adminDashboard/dashboard_stats.php'; ?>
-                    <!-- Chart -->
-                    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                        <h3 class="text-xl font-semibold mb-4">Price Distribution</h3>
-                        <canvas id="priceChart"></canvas>
-                    </div>
-                    <?php
-                    break;
-                case 'products':
-                    ?>
-                    <!-- Products table -->
-                    <?php include 'partials/adminDashboard/products_table.php'; ?>
-                    <!-- Add Product Form -->
-                    <?php include 'partials/adminDashboard/add_product_form.php'; ?>
-                    <?php
-                    break;
+                        <!-- Statistics -->
+                        <?php include 'partials/adminDashboard/dashboard_stats.php'; ?>
+                        <!-- Chart -->
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                            <h3 class="text-xl font-semibold mb-4">Price Distribution</h3>
+                            <canvas id="priceChart"></canvas>
+                        </div>
+                        <?php
+                        break;
+                    case 'products':
+                        ?>
+                        <!-- Products table -->
+                        <?php include 'partials/adminDashboard/products_table.php'; ?>
+                        <!-- Add Product Form -->
+                        <?php include 'partials/adminDashboard/add_product_form.php'; ?>
+                        <?php
+                        break;
 
-                case 'categories':
-                    ?>
-                    <!-- Add Category Form -->
-                    <?php include 'partials/adminDashboard/add_category_form.php'; ?>
-                    <?php
-                    break;
+                    case 'categories':
+                        ?>
+                        <!-- Add Category Form -->
+                        <?php include 'partials/adminDashboard/add_category_form.php'; ?>
+                        <?php
+                        break;
 
-                default:
-                    ?>
-                    <!-- Default Content -->
-                    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                        <h3 class="text-xl font-semibold mb-4">Under Development</h3>
-                        <p>This is the default content.</p>
-                    </div>
-                    <?php
-                    break;
+                    default:
+                        ?>
+                        <!-- Default Content -->
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                            <h3 class="text-xl font-semibold mb-4">Under Development</h3>
+                            <p>This is the default content.</p>
+                        </div>
+                        <?php
+                        break;
+                }
             }
             ?>
+
+
         </div>
     </div>
 

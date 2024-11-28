@@ -45,7 +45,7 @@ $categories = fetchCategories();
                             <td class="py-2 px-4 border-b">LKR <?= number_format($product['price'], 2) ?></td>
                             <td class="py-2 px-4 border-b"><?= $product['stock_quantity'] ?></td>
                             <td class="py-2 px-4 border-b">
-                                <a href="edit_product.php?id=<?= $product['id'] ?>"
+                                <a href="./dashboard?action=edit&tab=editing&id=<?= $product['id'] ?>"
                                     class="text-blue-500 hover:underline mr-2">Edit</a>
                                 <button onclick="deleteProduct(<?= $product['id'] ?>)"
                                     class="text-red-500 hover:underline">Delete</button>
