@@ -47,42 +47,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 
-<body class="min-h-screen font-nunito flex items-center justify-center bg-gray-100">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96 max-w-full">
-        <div class="text-center mb-8">
+<body class="font-nunito ">
+    <?php require_once 'partials/navbar.php'; ?>
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
 
-            <h1 class="text-5xl text-gray-800 font-chewy">Pawsome Admin</h1>
-        </div>
+        <div class="bg-white p-8 rounded-lg shadow-md w-96 max-w-full">
+            <div class="text-center mb-8">
 
-        <?php if (isset($error)): ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <span class="block sm:inline"><?php echo htmlspecialchars($error); ?></span>
+                <h1 class="text-5xl text-gray-800 font-chewy">Pawsome Admin Login</h1>
             </div>
-        <?php endif; ?>
 
-        <form method="POST" class="space-y-6">
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input type="email" id="email" name="email" required
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]">
+            <?php if (isset($error)): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline"><?php echo htmlspecialchars($error); ?></span>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]">
+                </div>
+                <button type="submit"
+                    class="w-full bg-[#FF9800] text-white py-2 px-4 rounded-md hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-[#FF9800] focus:ring-opacity-50 transition duration-300">
+                    Login
+                </button>
+            </form>
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <a href="../" class="underline">Back to home</a>
             </div>
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                <input type="password" id="password" name="password" required
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]">
+
+
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p>Pawsome Pet Supplies &copy; <?php echo date('Y'); ?></p>
             </div>
-            <button type="submit"
-                class="w-full bg-[#FF9800] text-white py-2 px-4 rounded-md hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-[#FF9800] focus:ring-opacity-50 transition duration-300">
-                Login
-            </button>
-        </form>
-
-
-
-        <div class="mt-8 text-center text-sm text-gray-500">
-            <p>Pawsome Pet Supplies &copy; <?php echo date('Y'); ?></p>
         </div>
     </div>
+    <?php require_once 'partials/footer.php'; ?>
 </body>
 
 </html>
