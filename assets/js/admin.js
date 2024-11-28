@@ -199,4 +199,60 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+
+  const addCategoryForm = document.getElementById('addCategoryForm')
+  if (addCategoryForm) {
+    addCategoryForm.addEventListener('submit', async function (e) {
+      e.preventDefault()
+
+      const data = {
+        name: document.getElementById('category_name').value,
+        description: document.getElementById('category_description').value,
+      }
+
+      try {
+        const response = await fetch(
+          'http://localhost/pawsome/api/categories/add_category.php',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          }
+        )
+
+        const result = await response.json()
+
+        if (result.categoryId) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Category added successfully',
+            icon: 'success',
+            confirmButtonColor: '#3B82F6',
+          }).then((result) => {
+            if (result.isConfirmed || result.isDismissed) {
+              addCategoryForm.reset()
+              location.reload()
+            }
+          })
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: result.error || 'Failed to add category',
+            icon: 'error',
+            confirmButtonColor: '#3B82F6',
+          })
+        }
+      } catch (error) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred',
+          icon: 'error',
+          confirmButtonColor: '#3B82F6',
+        })
+        console.error('Error:', error)
+      }
+    })
+  }
 })
