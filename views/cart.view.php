@@ -12,10 +12,10 @@ require 'partials/header.php';
         <main class="container mx-auto px-4 py-8">
             <h1 class="text-3xl md:text-5xl font-extralight font-chewy mb-8">My Cart</h1>
             <div id="cart-container">
-                <!-- Cart items will be dynamically inserted here -->
+                <!-- cat items will be dynamically inserted here -->
             </div>
             <div id="cart-summary" class="mt-8">
-                <!-- Cart summary will be dynamically inserted here -->
+                <!-- cart summary will be  inserted here -->
             </div>
         </main>
     <?php } elseif ($action === 'checkout') { ?>
