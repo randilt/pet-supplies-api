@@ -103,11 +103,49 @@ function initializeAddToCart() {
     return
   }
 
+  // Check if the product is already in the cart
+  const userCart = JSON.parse(localStorage.getItem('userCart')) || []
+  const existingProduct = userCart.find((item) => item.id === productData.id)
+
+  if (parseInt(quantityElement.textContent) <= 0) {
+    addToCartButton.textContent = 'Product Out of Stock'
+    addToCartButton.disabled = true
+    addToCartButton.classList.add('bg-accent/50', 'cursor-not-allowed')
+  }
+
+  if (existingProduct) {
+    addToCartButton.textContent = 'Added to cart'
+    addToCartButton.disabled = true
+    addToCartButton.classList.add('bg-accent/50', 'cursor-not-allowed')
+  }
+
   addToCartButton.addEventListener('click', () => {
-    const selectedQty = parseInt(quantityElement.textContent) || 1
+    const selectedQty = parseInt(quantityElement.textContent)
     console.log('Adding to cart:', {
       product: productData,
       selectedQty: selectedQty,
     })
+    if (selectedQty <= 0) {
+      console.log('Invalid quantity')
+      return
+    }
+    updateCart(productData, selectedQty)
+    addToCartButton.textContent = 'Added to cart'
+    addToCartButton.disabled = true
   })
+}
+function updateCart(product, quantity) {
+  let userCart = JSON.parse(localStorage.getItem('userCart')) || []
+
+  const existingProductIndex = userCart.findIndex(
+    (item) => item.id === product.id
+  )
+
+  if (existingProductIndex !== -1) {
+    userCart[existingProductIndex].quantity += quantity
+  } else {
+    userCart.push({ ...product, quantity: quantity })
+  }
+
+  localStorage.setItem('userCart', JSON.stringify(userCart))
 }
