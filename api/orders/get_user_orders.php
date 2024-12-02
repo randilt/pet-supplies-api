@@ -21,11 +21,6 @@ try {
 
     $conn = $db->getConnection();
 
-    // Optional query parameters for pagination and filtering
-    $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-    $per_page = isset($_GET['per_page']) ? max(1, intval($_GET['per_page'])) : 10;
-    $offset = ($page - 1) * $per_page;
-
     // Optional status filter
     $status_filter = isset($_GET['status']) ? $_GET['status'] : null;
 
@@ -46,7 +41,7 @@ try {
         $query .= " AND status = ?";
     }
 
-    $query .= " ORDER BY created_at DESC LIMIT ? OFFSET ?";
+    $query .= " ORDER BY created_at DESC";
 
     // Prepare and execute statement for orders
     $stmt = $conn->prepare($query);
@@ -56,11 +51,8 @@ try {
     $stmt->bindValue($param_index++, $user_id, PDO::PARAM_INT);
 
     if ($status_filter) {
-        $stmt->bindValue($param_index++, $status_filter, PDO::PARAM_STR);
+        $stmt->bindValue($param_index, $status_filter, PDO::PARAM_STR);
     }
-
-    $stmt->bindValue($param_index++, $per_page, PDO::PARAM_INT);
-    $stmt->bindValue($param_index, $offset, PDO::PARAM_INT);
 
     $stmt->execute();
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -72,7 +64,8 @@ try {
             oi.product_id,
             oi.quantity,
             oi.price_at_time,
-            p.name as product_name
+            p.name as product_name,
+            p.image_url as product_image
         FROM order_items oi
         JOIN products p ON oi.product_id = p.id
         WHERE oi.order_id = ?
@@ -84,31 +77,9 @@ try {
         $order['items'] = $items_stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Count total orders for pagination
-    $count_query = "SELECT COUNT(*) FROM orders WHERE user_id = ?";
-    if ($status_filter) {
-        $count_query .= " AND status = ?";
-    }
-
-    $count_stmt = $conn->prepare($count_query);
-    $count_param_index = 1;
-    $count_stmt->bindValue($count_param_index++, $user_id, PDO::PARAM_INT);
-
-    if ($status_filter) {
-        $count_stmt->bindValue($count_param_index, $status_filter, PDO::PARAM_STR);
-    }
-
-    $count_stmt->execute();
-    $total_orders = $count_stmt->fetchColumn();
-
     Response::json([
         'orders' => $orders,
-        'pagination' => [
-            'current_page' => $page,
-            'per_page' => $per_page,
-            'total_orders' => intval($total_orders),
-            'total_pages' => ceil($total_orders / $per_page)
-        ]
+        'total_count' => count($orders)
     ]);
 
 } catch (Exception $e) {
