@@ -114,7 +114,7 @@ function initializeAddToCart() {
   }
 
   if (existingProduct) {
-    addToCartButton.textContent = 'Added to cart'
+    addToCartButton.textContent = 'Added to cart ✔'
     addToCartButton.disabled = true
     addToCartButton.classList.add('bg-accent/50', 'cursor-not-allowed')
   }
@@ -130,7 +130,7 @@ function initializeAddToCart() {
       return
     }
     updateCart(productData, selectedQty)
-    addToCartButton.textContent = 'Added to cart'
+    addToCartButton.textContent = 'Added to cart ✔'
     addToCartButton.disabled = true
   })
 }
@@ -148,4 +148,12 @@ function updateCart(product, quantity) {
   }
 
   localStorage.setItem('userCart', JSON.stringify(userCart))
+
+  // Update the button to show the product is added to the cart
+  const addToCartButton = document.getElementById('add-to-cart')
+  if (addToCartButton) {
+    addToCartButton.textContent = 'Added to cart ✔'
+    addToCartButton.disabled = true
+    addToCartButton.classList.add('bg-accent/50', 'cursor-not-allowed')
+  }
 }
