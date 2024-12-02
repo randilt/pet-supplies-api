@@ -2,6 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM Content Loaded')
+  // Add to cart
+  initializeAddToCart()
+  // Product data
+  console.log(initializeProductData())
   // Quantity controls
   initializeQuantityControls()
   // Thumbnail functionality
@@ -66,4 +70,44 @@ function initializeThumbnails() {
       })
     })
   }
+}
+function initializeProductData() {
+  const productDataElement = document.getElementById('product-data')
+
+  if (productDataElement) {
+    const productId = productDataElement.getAttribute('data-id')
+    const price = productDataElement.getAttribute('data-price')
+    const name = productDataElement.getAttribute('data-name')
+    const imageUrl = productDataElement.getAttribute('data-image-url')
+    const description = productDataElement.getAttribute('data-description')
+
+    return {
+      id: productId,
+      price: price,
+      name: name,
+      imageUrl: imageUrl,
+      description: description,
+    }
+  } else {
+    console.log('Product data element not found')
+  }
+}
+
+function initializeAddToCart() {
+  const addToCartButton = document.getElementById('add-to-cart')
+  const quantityElement = document.getElementById('quantity')
+  const productData = initializeProductData()
+
+  if (!addToCartButton || !quantityElement || !productData) {
+    console.log('Add to cart elements not found')
+    return
+  }
+
+  addToCartButton.addEventListener('click', () => {
+    const selectedQty = parseInt(quantityElement.textContent) || 1
+    console.log('Adding to cart:', {
+      product: productData,
+      selectedQty: selectedQty,
+    })
+  })
 }

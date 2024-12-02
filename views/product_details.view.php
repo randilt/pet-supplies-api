@@ -79,6 +79,11 @@ require 'partials/header.php';
                     </div> -->
                 </div>
                 <!-- Product Details -->
+                <div id="product-data" data-id="<?php echo $productId; ?>" data-price="<?php echo $price; ?>"
+                    data-name="<?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?>"
+                    data-image-url="<?php echo htmlspecialchars($img_url, ENT_QUOTES, 'UTF-8'); ?>"
+                    data-description="<?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?>"
+                    style="display: none;"></div>
                 <div class="md:w-1/2">
                     <h1 class="text-3xl md:text-5xl font-extralight font-chewy mb-4"><?php echo $title; ?></h1>
                     <p class="text-2xl font-bold text-primary mb-4">
@@ -124,10 +129,9 @@ require 'partials/header.php';
                         <?php if ($in_stock): ?>
                             <input type="hidden" id="max-quantity" value="<?php echo $stock_qty; ?>">
                         <?php endif; ?>
-                        <!-- Add this right after your quantity controls -->
                         <input type="hidden" id="max-quantity" value="<?php echo $in_stock ? $stock_qty : 0; ?>">
                     </div>
-                    <button
+                    <button id="add-to-cart"
                         class="w-full bg-accent text-white py-3 px-6 rounded-md hover:bg-opacity-90 transition duration-300">Add
                         to Cart</button>
                 </div>
