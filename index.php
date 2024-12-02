@@ -7,6 +7,7 @@ $routes = [
     "/about" => "views/about.view.php",
     "/contact" => "views/contact.view.php",
     "/subscription" => "views/subscription.view.php",
+    "/cart" => "views/cart.view.php",
     "/admin/login" => "views/admin-login.view.php",
     "/admin/dashboard" => "views/admin-dashboard.view.php",
     "/admin/dashboard/edit" => "views/admin-edit-product.view.php",
