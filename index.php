@@ -29,10 +29,8 @@ if (preg_match('/^\/product\/([a-zA-Z0-9-]+)$/', $uri, $matches)) {
     require "views/single_product.php";
     exit;
 }
-
 if (array_key_exists($uri, $routes)) {
     require $routes[$uri];
-
 } else {
     http_response_code(404);
     require "views/404.view.php";
