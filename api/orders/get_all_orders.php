@@ -11,15 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 try {
     $db = new Database();
-    $auth = new Auth($db, true);  // Set isApi to true for API authentication
-
-    // Require user authentication
+    $auth = new Auth($db, true);
     $auth->requireAuth();
 
     $conn = $db->getConnection();
 
-    // Fetch all orders first
-    $orders_stmt = $conn->prepare("
+    // Get filter and sort parameters
+    $status = $_GET['status'] ?? null;
+    $sort = $_GET['sort'] ?? 'latest'; // default to latest
+
+    // Prepare base query
+    $query = "
         SELECT 
             id,
             user_id,
@@ -28,10 +30,27 @@ try {
             shipping_address,
             created_at
         FROM orders
-        ORDER BY created_at DESC
-    ");
-    $orders_stmt->execute();
-    $orders = $orders_stmt->fetchAll(PDO::FETCH_ASSOC);
+    ";
+
+    // Add status filter if provided
+    if ($status) {
+        $query .= " WHERE status = :status";
+    }
+
+    // Add sorting
+    $query .= $sort === 'oldest'
+        ? " ORDER BY created_at ASC"
+        : " ORDER BY created_at DESC";
+
+    // Prepare and execute statement
+    $stmt = $conn->prepare($query);
+
+    if ($status) {
+        $stmt->bindParam(':status', $status);
+    }
+
+    $stmt->execute();
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Fetch items for each order
     $items_stmt = $conn->prepare("
@@ -40,8 +59,7 @@ try {
             oi.product_id,
             oi.quantity,
             oi.price_at_time,
-            p.name as product_name,
-            p.image_url as product_image
+            p.name as product_name
         FROM order_items oi
         JOIN products p ON oi.product_id = p.id
         WHERE oi.order_id = ?
