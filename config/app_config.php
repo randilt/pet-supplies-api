@@ -1,7 +1,5 @@
 <?php
-// define('BASE_URL', 'http://localhost/pet-supplies-store-api');
-// Load the config.json file
-$configFile = __DIR__ . '/config.json';
+$configFile = 'config.json';
 if (file_exists($configFile)) {
     $config = json_decode(file_get_contents($configFile), true);
 
