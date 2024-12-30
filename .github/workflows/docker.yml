@@ -20,8 +20,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t randiltharusha/pawsome:${{ github.sha }} .
+          docker build -t randiltharusha/pawsome:${{ github.sha }} -t randiltharusha/pawsome:latest .
 
       - name: Push Docker image
         run: |
           docker push randiltharusha/pawsome:${{ github.sha }}
+          docker push randiltharusha/pawsome:latest
