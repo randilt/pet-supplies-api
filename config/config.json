@@ -1,0 +1,5 @@
+{
+  "env": "production",
+  "devApiUrl": "http://localhost/pawsome/api",
+  "prodApiUrl": "http://app/api"
+}

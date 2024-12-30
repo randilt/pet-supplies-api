@@ -1,3 +1,23 @@
+let apiUrl
+
+// Fetch configuration
+const fetchConfig = async () => {
+  const response = await fetch('../../config/config.json')
+  const config = await response.json()
+  return config
+}
+
+// Load config immediately
+fetchConfig()
+  .then((config) => {
+    apiUrl =
+      config.env === 'development' ? 'http://localhost/pawsome/api' : '/api'
+  })
+  .catch((error) => {
+    console.error('Failed to load configuration:', error)
+  })
+
+// Set up DOM event listeners
 document.addEventListener('DOMContentLoaded', function () {
   // Price distribution chart
   var priceChartStats = document.getElementById('priceChartStats')
@@ -67,15 +87,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // Add Product Form Handler
   const productForm = document.getElementById('productForm')
   if (productForm) {
     productForm.onsubmit = async function (e) {
+      console.log('Product form submit handler triggered')
+
       e.preventDefault()
 
-      // Create FormData object from the form
-      const formData = new FormData(productForm)
+      if (!apiUrl) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'System is not properly configured. Please try again later.',
+          icon: 'error',
+          confirmButtonColor: '#3B82F6',
+        })
+        return
+      }
 
-      // Create the product data object with the required fields
+      const formData = new FormData(productForm)
       const productData = {
         category_id: parseInt(formData.get('category_id')),
         name: formData.get('name'),
@@ -87,35 +117,27 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       try {
-        // Make the API call with JSON data
-        const response = await fetch(
-          'http://localhost/pawsome/api/products/add_product.php',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productData),
-          }
-        )
+        const response = await fetch(`${apiUrl}/products/add_product.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        })
 
         const data = await response.json()
 
         if (!response.ok) {
-          Swal.fire({
-            title: 'Error!',
-            text: data.error || 'Failed to update product',
-            icon: 'error',
-          })
           throw new Error(
             data.error || data.errors?.join(', ') || 'Failed to add product'
           )
         }
+
         console.log(data)
 
         Swal.fire({
           title: 'Success!',
-          text: 'Product updated successfully',
+          text: 'Product added successfully',
           icon: 'success',
           confirmButtonColor: '#3B82F6',
         }).then((result) => {
@@ -124,12 +146,10 @@ document.addEventListener('DOMContentLoaded', function () {
             location.reload()
           }
         })
-
-        console.log('Product added:', data)
       } catch (error) {
         Swal.fire({
           title: 'Error!',
-          text: error.message || 'Failed to update product',
+          text: error.message || 'Failed to add product',
           icon: 'error',
           confirmButtonColor: '#3B82F6',
         })
@@ -137,10 +157,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+
+  // Edit Product Form Handler
   const editProductForm = document.getElementById('editProductForm')
   if (editProductForm) {
     editProductForm.onsubmit = async function (e) {
       e.preventDefault()
+
+      if (!apiUrl) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'System is not properly configured. Please try again later.',
+          icon: 'error',
+          confirmButtonColor: '#3B82F6',
+        })
+        return
+      }
 
       const formData = new FormData(this)
       const productData = {
@@ -155,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       try {
         const response = await fetch(
-          `http://localhost/pawsome/api/products/update_product.php?id=${formData.get(
+          `${apiUrl}/products/update_product.php?id=${formData.get(
             'product_id'
           )}`,
           {
@@ -170,11 +202,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const data = await response.json()
 
         if (!response.ok) {
-          Swal.fire({
-            title: 'Error!',
-            text: data.error || 'Failed to update product',
-            icon: 'error',
-          })
           throw new Error(data.error || 'Failed to update product')
         }
 
@@ -200,10 +227,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // Add Category Form Handler
   const addCategoryForm = document.getElementById('addCategoryForm')
   if (addCategoryForm) {
-    addCategoryForm.addEventListener('submit', async function (e) {
+    addCategoryForm.onsubmit = async function (e) {
       e.preventDefault()
+
+      if (!apiUrl) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'System is not properly configured. Please try again later.',
+          icon: 'error',
+          confirmButtonColor: '#3B82F6',
+        })
+        return
+      }
 
       const data = {
         name: document.getElementById('category_name').value,
@@ -211,16 +249,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       try {
-        const response = await fetch(
-          'http://localhost/pawsome/api/categories/add_category.php',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          }
-        )
+        const response = await fetch(`${apiUrl}/categories/add_category.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
 
         const result = await response.json()
 
@@ -237,22 +272,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           })
         } else {
-          Swal.fire({
-            title: 'Error!',
-            text: result.error || 'Failed to add category',
-            icon: 'error',
-            confirmButtonColor: '#3B82F6',
-          })
+          throw new Error(result.error || 'Failed to add category')
         }
       } catch (error) {
         Swal.fire({
           title: 'Error!',
-          text: 'An error occurred',
+          text: error.message || 'An error occurred',
           icon: 'error',
           confirmButtonColor: '#3B82F6',
         })
         console.error('Error:', error)
       }
-    })
+    }
   }
 })

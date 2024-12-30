@@ -5,6 +5,19 @@ require_once '../../utils/Response.php';
 require_once '../../utils/Database.php';
 require_once '../../utils/Auth.php';
 
+header("Access-Control-Allow-Origin: *");
+
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, Origin");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 3600");
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("HTTP/1.1 200 OK");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     Response::json(['error' => 'Method not allowed'], 405);
 }

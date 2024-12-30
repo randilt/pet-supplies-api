@@ -1,4 +1,6 @@
 <?php
+require_once 'config/app_config.php';
+define('API_BASE_URL', ENV === 'production' ? 'http://app/api' : 'http://localhost/pawsome/api');
 
 function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20, $isAdmin = false, $page = null)
 {
@@ -24,7 +26,8 @@ function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $
         $queryParams['search'] = $search;
     }
 
-    $apiUrl = 'http://localhost/pawsome/api/products/get_products.php?' . http_build_query($queryParams);
+    $apiUrl = API_BASE_URL . '/products/get_products.php?' . http_build_query($queryParams);
+
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -55,7 +58,7 @@ function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $
 
 function fetchProductsById($id)
 {
-    $apiUrl = 'http://localhost/pawsome/api/products/get_products.php?id=' . $id;
+    $apiUrl = API_BASE_URL . '/products/get_products.php?id=' . $id;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -71,7 +74,7 @@ function fetchProductsById($id)
 
 function fetchCategories()
 {
-    $apiUrl = 'http://localhost/pawsome/api/categories/get_categories.php';
+    $apiUrl = API_BASE_URL . '/categories/get_categories.php';
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -124,7 +127,7 @@ function handleLogout()
 // Function to process the logout API call
 function logoutUser()
 {
-    $apiUrl = 'http://localhost/pawsome/api/auth/logout.php';
+    $apiUrl = API_BASE_URL . '/auth/user/logout.php';
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
