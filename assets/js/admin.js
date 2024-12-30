@@ -1,6 +1,6 @@
 // Fetch configuration
 const fetchConfig = async () => {
-  const response = await fetch('../config/config.json')
+  const response = await fetch('../config.json')
   const config = await response.json()
   return config
 }

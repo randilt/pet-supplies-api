@@ -1,3 +1,19 @@
+// Fetch configuration
+const fetchConfig = async () => {
+  const response = await fetch('./config.json')
+  const config = await response.json()
+  return config
+}
+
+// Load config immediately
+fetchConfig()
+  .then((config) => {
+    baseUrl = config.env === 'development' ? 'http://localhost/pawsome' : ''
+  })
+  .catch((error) => {
+    console.error('Failed to load configuration:', error)
+  })
+
 document.addEventListener('DOMContentLoaded', function () {
   const filterForm = document.getElementById('filter-form')
   const searchInput = document.getElementById('search')
@@ -31,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (maxPrice !== '') params.append('max_price', maxPrice)
     params.append('page', 1)
 
-    window.location.href = `http://localhost/pawsome/products?${params.toString()}`
+    window.location.href = `${baseUrl}/products?${params.toString()}`
   })
 
   // Set form values from URL parameters
