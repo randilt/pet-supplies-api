@@ -19,7 +19,7 @@ if ($productId) {
         $description = $product['description'];
         $price = htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8');
         $img_url = $product['image_url'];
-        $long_description = htmlspecialchars($product['long_description'], ENT_QUOTES, 'UTF-8');
+        $long_description = isset($product['long_description']) ? htmlspecialchars($product['long_description'], ENT_QUOTES, 'UTF-8') : '';
         $stock_qty = $product['stock_quantity'];
         $category_id = $product['category_id'];
         $category_name = $product['category_name'];
