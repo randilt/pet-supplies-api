@@ -3,6 +3,7 @@ require_once 'config/app_config.php';
 define('API_BASE_URL', ENV === 'production' ? 'http://app/api' : 'http://localhost/pawsome/api');
 // echo ENV;
 
+echo 'is it working?';
 function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20, $isAdmin = false, $page = null)
 {
     $queryParams = array('limit' => $limit);
