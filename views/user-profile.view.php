@@ -11,10 +11,6 @@ $auth = new Auth($db);
 // Ensure the user is logged in
 $auth->requireAuth();
 
-// Fetch user data
-// $orders = fetchUserOrders();
-// print_r($orders);
-
 $userId = $_SESSION['user_id'];
 $conn = $db->getConnection();
 $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
@@ -37,13 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
 
     $successMessage = "Profile updated successfully!";
 }
-?>
-<?
+
 $title = 'My Profile - Pawsome';
 require_once 'partials/header.php';
 ?>
-
-
 
 <body class="font-nunito bg-gray-100">
     <?php require_once 'partials/navbar.php'; ?>
@@ -57,11 +50,11 @@ require_once 'partials/header.php';
             </div>
         <?php endif; ?>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="md:col-span-2">
-                <div class="profile-section">
-                    <h2 class="text-2xl font-bold mb-4">Personal Information</h2>
-                    <form method="POST" action="">
+        <div class="grid grid-cols-1 gap-8">
+            <div class="profile-section">
+                <h2 class="text-2xl font-bold mb-4">Personal Information</h2>
+                <form method="POST" action="">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
                             <input type="text" id="name" name="name"
@@ -85,28 +78,25 @@ require_once 'partials/header.php';
                             <textarea id="address" name="address" rows="3"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]"><?php echo htmlspecialchars($user['address'] ?? ''); ?></textarea>
                         </div>
-                        <button type="submit" name="update_profile"
-                            class="w-full bg-[#FF9800] text-white py-2 px-4 rounded-md hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-[#FF9800] focus:ring-opacity-50 transition duration-300">
-                            Update Profile
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div>
-                <div class="profile-section">
-                    <h2 class="text-2xl font-bold mb-4">Recent Orders</h2>
-                    <div id="ordersContainer">
-                        <p class="text-gray-600">Loading orders...</p>
                     </div>
-                </div>
+                    <button type="submit" name="update_profile"
+                        class="w-full md:w-auto bg-[#FF9800] text-white py-2 px-4 rounded-md hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-[#FF9800] focus:ring-opacity-50 transition duration-300">
+                        Update Profile
+                    </button>
+                </form>
+            </div>
 
+            <div class="profile-section">
+                <h2 class="text-2xl font-bold mb-4">Recent Orders</h2>
+                <div id="ordersContainer" class="space-y-4">
+                    <p class="text-gray-600">Loading orders...</p>
+                </div>
             </div>
         </div>
     </div>
 
     <?php require_once 'partials/footer.php'; ?>
-    <script src="assets/js/orders.js">
-    </script>
+    <script src="assets/js/orders.js"></script>
 </body>
 
 </html>

@@ -27,6 +27,22 @@ function formatCurrency(amount) {
   }).format(amount)
 }
 
+function getStatusBadge(status) {
+  const statusColors = {
+    pending: 'bg-yellow-100 text-yellow-800',
+    processing: 'bg-blue-100 text-blue-800',
+    shipped: 'bg-purple-100 text-purple-800',
+    delivered: 'bg-green-100 text-green-800',
+    cancelled: 'bg-red-100 text-red-800',
+  }
+
+  return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+    statusColors[status]
+  }">
+    ${status.charAt(0).toUpperCase() + status.slice(1)}
+  </span>`
+}
+
 function renderOrders(orders) {
   const container = document.getElementById('ordersContainer')
 
@@ -37,34 +53,64 @@ function renderOrders(orders) {
   }
 
   const ordersHTML = orders
-    .slice(0, 5)
     .map(
       (order) => `
-        <div class="order-item">
-            <p class="font-semibold">Order #${order.id}</p>
-            <p class="text-sm text-gray-600">Date: ${formatDate(
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-4">
+        <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Order #${
+              order.id
+            }</h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">Placed on ${formatDate(
               order.created_at
             )}</p>
-            <p class="text-sm text-gray-600">Status: ${
-              order.status.charAt(0).toUpperCase() + order.status.slice(1)
-            }</p>
-            <p class="text-sm text-gray-600">Total: ${formatCurrency(
-              order.total_amount
-            )}</p>
-            <div class="mt-2">
-                ${order.items
-                  .map(
-                    (item) => `
-                    <div class="text-sm text-gray-600 ml-4">
-                        • ${item.quantity}x ${item.product_name}
-                    </div>
-                `
-                  )
-                  .join('')}
-            </div>
-            <a href="order_details.php?id=${order.id}" 
-               class="text-[#FF9800] hover:underline text-sm">View Details</a>
+          </div>
+          <div>
+            ${getStatusBadge(order.status)}
+          </div>
         </div>
+        <div class="border-t border-gray-200">
+          <dl>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Total Amount</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${formatCurrency(
+                order.total_amount
+              )}</dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Items</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                  ${order.items
+                    .map(
+                      (item) => `
+                    <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                      <div class="w-0 flex-1 flex items-center">
+                        <span class="ml-2 flex-1 w-0 truncate">${
+                          item.quantity
+                        }x ${item.product_name}</span>
+                      </div>
+                      <div class="ml-4 flex-shrink-0">
+                        <span class="font-medium">${formatCurrency(
+                          item.price_at_time * item.quantity
+                        )}</span>
+                      </div>
+                    </li>
+                  `
+                    )
+                    .join('')}
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <a href="order_details.php?id=${order.id}" 
+             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#FF9800] hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF9800]">
+            View Details
+          </a>
+        </div>
+      </div>
     `
     )
     .join('')
