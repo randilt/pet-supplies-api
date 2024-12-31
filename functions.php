@@ -102,29 +102,29 @@ function fetchCategories()
 
 function handleLogout()
 {
-    // Only process POST requests
+    // only process POST requests
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ./dashboard.php');
         exit;
     }
 
-    // Clear all session data
+    // clear all session data
     $_SESSION = array();
 
-    // Destroy the session cookie
+    // destroy the session cookie
     if (isset($_COOKIE[session_name()])) {
         setcookie(session_name(), '', time() - 3600, '/');
     }
 
-    // Destroy the session
+    // destroy the session
     session_destroy();
 
-    // Redirect to login page
+    // redirect to login page
     header('Location: ./login');
     exit;
 }
 
-// Function to process the logout API call
+// function to process the logout API call
 function logoutUser()
 {
     $apiUrl = API_BASE_URL . '/auth/user/logout.php';
