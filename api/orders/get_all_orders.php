@@ -28,7 +28,8 @@ try {
             total_amount,
             status,
             shipping_address,
-            created_at
+            created_at,
+            updated_at
         FROM orders
     ";
 
