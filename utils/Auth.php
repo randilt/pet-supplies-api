@@ -56,7 +56,7 @@ class Auth
         }
     }
 
-    public function requireGuest($redirectUrl = './dashboard')
+    public function requireGuest($redirectUrl = './profile')
     {
         if ($this->isAuthenticated()) {
             header("Location: $redirectUrl");

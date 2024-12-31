@@ -148,3 +148,80 @@ function logoutUser()
     return json_decode($response, true);
 }
 
+function fetchUserOrders($status = null)
+{
+    $queryParams = array();
+
+    if ($status !== null) {
+        $queryParams['status'] = $status;
+    }
+
+    $apiUrl = API_BASE_URL . '/orders/get_user_orders.php';
+    if (!empty($queryParams)) {
+        $apiUrl .= '?' . http_build_query($queryParams);
+    }
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        $error = 'Curl error: ' . curl_error($ch);
+        curl_close($ch);
+        throw new Exception($error);
+    }
+
+    curl_close($ch);
+
+    $data = json_decode($response, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('Failed to parse JSON: ' . json_last_error_msg());
+    }
+
+
+    return $data['orders'] ?? ['error' => 'No orders found'];
+}
+
+function fetchAllOrders($status = null, $sort = 'latest')
+{
+    $queryParams = array();
+
+    if ($status !== null) {
+        $queryParams['status'] = $status;
+    }
+    if ($sort !== null) {
+        $queryParams['sort'] = $sort;
+    }
+
+    $apiUrl = API_BASE_URL . '/orders/get_all_orders.php';
+    if (!empty($queryParams)) {
+        $apiUrl .= '?' . http_build_query($queryParams);
+    }
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        $error = 'Curl error: ' . curl_error($ch);
+        curl_close($ch);
+        throw new Exception($error);
+    }
+
+    curl_close($ch);
+
+    $data = json_decode($response, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('Failed to parse JSON: ' . json_last_error_msg());
+    }
+
+    return $data['orders'] ?? [];
+}

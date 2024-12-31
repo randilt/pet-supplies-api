@@ -38,6 +38,13 @@ $menuItems = [
                     class="absolute -top-2 -right-2 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">0</span>
 
             </a>
+            <a href="./profile" class="text-gray-600 hover:text-primary transition" aria-label="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+            </a>
         </div>
 
         <button id="mobile-menu-button" class="md:hidden focus:outline-none" aria-label="Toggle mobile menu">
