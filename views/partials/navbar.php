@@ -61,6 +61,17 @@ $menuItems = [
                 <?= htmlspecialchars($item['text']) ?>
             </a>
         <?php endforeach; ?>
+
+        <a href="./cart">
+            <div class="flex items-center justify-between py-2 px-4 text-sm hover:bg-gray-100">
+                <span>Cart</span>
+                <span id="cart-count"
+                    class="bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">0</span>
+            </div>
+        </a>
+
+        <a href="./profile" class="block py-2 px-4 text-sm hover:bg-gray-100">Profile</a>
+
     </div>
 </header>
 
