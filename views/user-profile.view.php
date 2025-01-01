@@ -78,7 +78,7 @@ require_once 'partials/header.php';
                 </form>
             </div>
 
-            <div class="profile-section">
+            <div class="profile-section" id="orders">
                 <h2 class="text-2xl font-bold mb-4">Recent Orders</h2>
                 <div id="ordersContainer" class="space-y-4">
                     <p class="text-gray-600">Loading orders...</p>

@@ -83,25 +83,42 @@ function loadCheckout() {
   checkoutForm.addEventListener('submit', handleCheckout)
 }
 
-function handleCheckout(event) {
+async function handleCheckout(event) {
   event.preventDefault()
 
-  const formData = new FormData(event.target)
-  const orderData = Object.fromEntries(formData.entries())
+  try {
+    const formData = new FormData(event.target)
+    const orderData = Object.fromEntries(formData.entries())
+    const cartItems = JSON.parse(localStorage.getItem('userCart')) || []
 
-  orderData.items = JSON.parse(localStorage.getItem('userCart')) || []
-  orderData.total = orderData.items.reduce(
-    (total, item) => total + parseFloat(item.price) * item.quantity,
-    0
-  )
+    const payload = {
+      shipping_address: `${orderData.address}, ${orderData.city}`,
+      items: cartItems.map((item) => ({
+        product_id: parseInt(item.id),
+        quantity: item.quantity,
+      })),
+    }
 
-  console.log('Order Data:', orderData)
+    const response = await fetch('/api/orders/new_order.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
 
-  localStorage.setItem('order', JSON.stringify(orderData))
-  localStorage.removeItem('userCart')
+    if (!response.ok) {
+      const error = await response.json()
+      throw new Error(error.errors?.[0] || 'Order creation failed')
+    }
 
-  alert('Order placed successfully!')
-  window.location.href = './cart'
+    const result = await response.json()
+    console.log('Order created:', result)
+    alert('Order created successfully!')
+    localStorage.removeItem('userCart')
+    window.location.href = `/profile#orders`
+  } catch (error) {
+    alert('An error occured while placing the order')
+    console.error('Checkout error:', error)
+  }
 }
 
 // Load cart or checkout on page load

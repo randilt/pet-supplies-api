@@ -75,7 +75,13 @@ function renderOrders(orders) {
               <dt class="text-sm font-medium text-gray-500">Total Amount</dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${formatCurrency(
                 order.total_amount
-              )}</dd>
+              )} - Cash on delivery</dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Shipping Address</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${
+                order.shipping_address
+              }</dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">Items</dt>
@@ -104,11 +110,10 @@ function renderOrders(orders) {
             </div>
           </dl>
         </div>
-        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <a href="order_details.php?id=${order.id}" 
-             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#FF9800] hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF9800]">
-            View Details
-          </a>
+
+
+        <div class="bg-white px-4 py-4 sm:px-6 flex justify-end">
+    
         </div>
       </div>
     `
