@@ -145,7 +145,8 @@ function logoutUser()
 
     curl_close($ch);
 
-    return json_decode($response, true);
+    header('Location: ./login');
+    exit;
 }
 
 function fetchUserOrders($status = null)

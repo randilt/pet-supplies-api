@@ -44,10 +44,10 @@ try {
     $conn->beginTransaction();
 
     try {
-        // Get current user ID directly from session
+        // get current user ID directly from session
         $user_id = $_SESSION['user_id'];
 
-        // Calculate total amount and validate items
+        // calculate total amount and validate items
         $total_amount = 0;
         $order_items = [];
 

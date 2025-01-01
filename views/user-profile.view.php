@@ -8,10 +8,13 @@ require_once dirname(__DIR__) . '/functions.php';
 $db = new Database();
 $auth = new Auth($db);
 
-// Ensure the user is logged in
+// ensure the user is logged in
 $auth->requireAuth();
-
-$userId = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'] ?? $_SESSION['admin_id'] ?? null;
+// if (!$userId) {
+//     Response::json(['error' => 'Unauthorized access'], 401);
+//     exit;
+// }
 $conn = $db->getConnection();
 $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$userId]);
@@ -34,6 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     $successMessage = "Profile updated successfully!";
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    handleLogout();
+}
+
 $title = 'My Profile - Pawsome';
 require_once 'partials/header.php';
 ?>
@@ -42,7 +49,14 @@ require_once 'partials/header.php';
     <?php require_once 'partials/navbar.php'; ?>
 
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-chewy text-[#FF9800] mb-8 text-center">My Pawsome Profile</h1>
+        <div class="flex items-center justify-center flex-col mb-8">
+            <h1 class="text-4xl font-chewy text-[#FF9800] mb-8 text-center">My Pawsome Profile</h1>
+            <form method="POST" action="">
+                <button type="submit" name="logout"
+                    class="bg-[#FF9800] text-white py-2 px-4 rounded-md hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-[#FF9800] focus:ring-opacity-50 transition duration-300">Logout
+                </button>
+            </form>
+        </div>
 
         <?php if (isset($successMessage)): ?>
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
