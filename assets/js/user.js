@@ -27,6 +27,9 @@ async function fetchUsers(id = null, name = null) {
 
 async function updateUser(id, name, phone, address) {
   try {
+    if (!confirm('Are you sure you want to update your information?')) {
+      return
+    }
     const response = await fetch(`/api/user/update_user.php?id=${id}`, {
       method: 'PUT',
       headers: {
