@@ -122,6 +122,13 @@ $productsFrom5000 = $productsFrom5000['pagination']['total'];
                         <?php
                         break;
 
+                    case 'orders':
+                        ?>
+                        <!-- Orders table -->
+                        <?php include 'partials/adminDashboard/orders_table.php'; ?>
+                        <?php
+                        break;
+
                     default:
                         ?>
                         <!-- Default Content -->

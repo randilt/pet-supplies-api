@@ -76,9 +76,13 @@ try {
 
     Response::json([
         'message' => 'Order status updated successfully',
+        'success' => true,
         'order' => $order_details
     ]);
 
 } catch (Exception $e) {
-    Response::json(['error' => $e->getMessage()], 500);
+    Response::json([
+        'error' => $e->getMessage(),
+        'success' => false
+    ], 500);
 }
