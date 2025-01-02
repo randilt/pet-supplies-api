@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 try {
     $db = new Database();
-    $auth = new Auth($db);
+    // $auth = new Auth($db);
 
     // This is a protected route
     // $auth->requireAuth();
@@ -237,8 +237,12 @@ try {
             'sort_by' => $sort_by,
             'sort_order' => $sort_order
         ],
-        'stats' => $stats
+        'stats' => $stats,
+        'success' => true
     ]);
 } catch (Exception $e) {
-    Response::json(['error' => $e->getMessage()], 500);
+    Response::json([
+        'error' => $e->getMessage(),
+        'success' => false
+    ], 500);
 }
