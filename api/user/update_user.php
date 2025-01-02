@@ -67,12 +67,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         Response::json([
+            'success' => true,
             'message' => 'User updated successfully',
             'user' => $user
         ]);
 
     } catch (Exception $e) {
-        Response::json(['error' => $e->getMessage()], 500);
+        Response::json([
+            'error' => $e->getMessage(),
+            'success' => false
+        ], 500);
         exit;
     }
 }
