@@ -1,10 +1,10 @@
 <?php
-require_once '../../../config/database.php';
-require_once '../../../utils/Response.php';
-require_once '../../../utils/Database.php';
-require_once '../../../utils/Auth.php';
-require_once '../../../models/ProductModel.php';
-require_once '../../../controllers/ProductController.php';
+require_once '../../config/database.php';
+require_once '../../utils/Response.php';
+require_once '../../utils/Database.php';
+require_once '../../utils/Auth.php';
+require_once '../../models/CategoryModel.php';
+require_once '../../controllers/CategoryController.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -20,21 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 try {
     $db = new Database();
     $auth = new Auth($db, true);
-    $productModel = new ProductModel($db);
-    $productController = new ProductController($productModel, $auth);
+    $categoryModel = new CategoryModel($db);
+    $categoryController = new CategoryController($categoryModel, $auth);
 
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
-            $productController->get();
+            $categoryController->get();
             break;
         case 'POST':
-            $productController->create();
-            break;
-        case 'PUT':
-            $productController->update();
+            $categoryController->create();
             break;
         case 'DELETE':
-            $productController->delete();
+            $categoryController->delete();
             break;
         default:
             Response::json(['error' => 'Method not allowed'], 405);

@@ -60,23 +60,9 @@ $categories = fetchCategories();
 
 <script>
 
-    let apiUrl1
-    const fetchConfig1 = async () => {
-        const response = await fetch('../config.json ')
-        const config = await response.json()
-        return config
-    }
-    fetchConfig1()
-        .then((config) => {
-            apiUrl1 = config.env === 'development' ? 'http://localhost/pawsome/api' : '/api'
-        })
-        .catch((error) => {
-            console.error('Failed to load configuration:', error)
-        })
     function deleteProduct(productId) {
         if (confirm('Are you sure you want to delete this product?')) {
-            // Send AJAX request to delete the product
-            fetch(`${apiUrl}/products/delete_product.php?id=${productId}`, { method: 'DELETE' })
+            fetch(`/api/v1/products.php?id=${productId}`, { method: 'DELETE' })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);

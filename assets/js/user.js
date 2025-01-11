@@ -5,7 +5,7 @@ async function fetchUsers(id = null, name = null) {
     if (name) queryParams.append('name', name)
 
     const response = await fetch(
-      `/api/user/get_users.php?${queryParams.toString()}`,
+      `/api/v1/users.php?${queryParams.toString()}`,
       {
         method: 'GET',
         headers: {
@@ -30,7 +30,7 @@ async function updateUser(id, name, phone, address) {
     if (!confirm('Are you sure you want to update your information?')) {
       return
     }
-    const response = await fetch(`/api/user/update_user.php?id=${id}`, {
+    const response = await fetch(`/api/v1/users.php?id=${id} `, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

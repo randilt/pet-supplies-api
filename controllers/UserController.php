@@ -17,7 +17,11 @@ class UserController
 
     public function get()
     {
-        $this->auth->requireAdmin();
+        if (isset($_GET['id'])) {
+            $this->auth->requireAuth();
+        } else {
+            $this->auth->requireAdmin();
+        }
 
         $id = $_GET['id'] ?? null;
         $name = $_GET['name'] ?? null;

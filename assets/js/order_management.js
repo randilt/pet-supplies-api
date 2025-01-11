@@ -1,22 +1,12 @@
-let apiUrl
-
 document.addEventListener('DOMContentLoaded', initializeApp)
 
 async function initializeApp() {
   try {
-    const config = await fetchConfig()
-    apiUrl =
-      config.env === 'development' ? 'http://localhost/pawsome/api' : '/api'
     await fetchOrders()
   } catch (error) {
     console.error('Initialization failed:', error)
     showError('Failed to initialize application')
   }
-}
-
-async function fetchConfig() {
-  const response = await fetch('../config.json')
-  return response.json()
 }
 
 function showError(message) {
@@ -39,7 +29,7 @@ function getStatusClass(status) {
 }
 
 function fetchOrders() {
-  fetch(`${apiUrl}/orders/get_all_orders.php`)
+  fetch(`/api/v1/orders.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.orders && data.orders.length > 0) {
@@ -160,7 +150,7 @@ function updateOrderStatus(orderId) {
     confirmButtonText: 'Update',
     showLoaderOnConfirm: true,
     preConfirm: (status) => {
-      return fetch(`${apiUrl}/orders/update_order.php?id=${orderId}`, {
+      return fetch(`/api/v1/orders.php?id=${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -187,13 +177,6 @@ function updateOrderStatus(orderId) {
         icon: 'success',
       })
       fetchOrders()
-      //   const statusElement = document.getElementById(`status-${orderId}`)
-      //   statusElement.textContent =
-      //     result.value.status.charAt(0).toUpperCase() +
-      //     result.value.status.slice(1)
-      //   statusElement.className = `px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(
-      //     result.value.status
-      //   )}`
     }
   })
 }

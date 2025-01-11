@@ -1,6 +1,6 @@
 async function fetchUserOrders() {
   try {
-    const response = await fetch('/api/orders/get_user_orders.php')
+    const response = await fetch('/api/v1/orders.php?user=true')
     if (!response.ok) {
       throw new Error('Failed to fetch orders')
     }

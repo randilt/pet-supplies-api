@@ -1,20 +1,5 @@
 // Fetch configuration
-const fetchConfig = async () => {
-  const response = await fetch('../config.json')
-  const config = await response.json()
-  return config
-}
-
-// Load config immediately
-fetchConfig()
-  .then((config) => {
-    apiUrl =
-      config.env === 'development' ? 'http://localhost/pawsome/api' : '/api'
-  })
-  .catch((error) => {
-    console.error('Failed to load configuration:', error)
-  })
-
+const apiUrl = '/api'
 // Set up DOM event listeners
 document.addEventListener('DOMContentLoaded', function () {
   // Price distribution chart
@@ -115,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       try {
-        const response = await fetch(`${apiUrl}/products/add_product.php`, {
+        const response = await fetch(`${apiUrl}/v1/products.php`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -185,9 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       try {
         const response = await fetch(
-          `${apiUrl}/products/update_product.php?id=${formData.get(
-            'product_id'
-          )}`,
+          `${apiUrl}/v1/products.php?id=${formData.get('product_id')}`,
           {
             method: 'PUT',
             headers: {
@@ -247,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       try {
-        const response = await fetch(`${apiUrl}/categories/add_category.php`, {
+        const response = await fetch(`${apiUrl}/v1/categories.php`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

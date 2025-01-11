@@ -99,7 +99,7 @@ async function handleCheckout(event) {
       })),
     }
 
-    const response = await fetch('/api/orders/new_order.php', {
+    const response = await fetch('/api/v1/orders.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

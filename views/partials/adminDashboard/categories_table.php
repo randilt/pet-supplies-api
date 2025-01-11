@@ -41,21 +41,6 @@ $categories = fetchCategories();
         </table>
     </div>
     <script>
-        let apiUrl1
-
-        // Fetch configuration
-        const fetchConfig1 = async () => {
-            const response = await fetch('../config.json')
-            const config = await response.json()
-            return config
-        }
-        fetchConfig1()
-            .then((config) => {
-                apiUrl1 = config.env === 'development' ? 'http://localhost/pawsome/api' : '/api'
-            })
-            .catch((error) => {
-                console.error('Failed to load configuration:', error)
-            })
         function deleteCategory(categoryId) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -67,7 +52,7 @@ $categories = fetchCategories();
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`${apiUrl}/categories/delete_category.php?id=${categoryId}`, { method: 'DELETE' })
+                    fetch(`/api/v1/categories.php?id=${categoryId}`, { method: 'DELETE' })
                         .then(response => response.json())
                         .then(data => {
                             console.log(data)
@@ -82,7 +67,7 @@ $categories = fetchCategories();
                             } else {
                                 Swal.fire(
                                     'Error!',
-                                    data.message || 'Failed to delete category',
+                                    data.error || 'Failed to delete category',
                                     'error'
                                 );
                             }

@@ -1,11 +1,11 @@
 <?php
 // echo 'test';
-require_once '../../../config/database.php';
-require_once '../../../utils/Response.php';
-require_once '../../../utils/Database.php';
-require_once '../../../utils/Auth.php';
-require_once '../../../models/OrderModel.php';
-require_once '../../../controllers/OrderController.php';
+require_once '../../config/database.php';
+require_once '../../utils/Response.php';
+require_once '../../utils/Database.php';
+require_once '../../utils/Auth.php';
+require_once '../../models/OrderModel.php';
+require_once '../../controllers/OrderController.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -25,7 +25,7 @@ try {
     $orderController = new OrderController($orderModel, $auth);
 
     // get the endpoint from the URL
-    $endpoint = $_GET['endpoint'] ?? 'default';
+    $isUserReq = $_GET['user'] ?? 'default';
 
 
     // echo ($_SERVER['REQUEST_METHOD']);
@@ -33,7 +33,7 @@ try {
 
 
         case 'GET':
-            if ($endpoint === 'user') {
+            if ($isUserReq === 'true') {
                 $orderController->getUserOrders();
             } else {
                 // echo 'works';

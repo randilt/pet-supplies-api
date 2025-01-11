@@ -1,6 +1,6 @@
 <?php
 require_once 'config/app_config.php';
-define('API_BASE_URL', ENV === 'production' ? 'http://app/api' : 'http://localhost/pawsome/api');
+define('API_BASE_URL', 'http://app/api/v1');
 // echo ENV;
 function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $search = null, $limit = 20, $isAdmin = false, $page = null)
 {
@@ -26,7 +26,7 @@ function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $
         $queryParams['search'] = $search;
     }
 
-    $apiUrl = API_BASE_URL . '/products/get_products.php?' . http_build_query($queryParams);
+    $apiUrl = API_BASE_URL . '/products.php?' . http_build_query($queryParams);
 
 
     $ch = curl_init();
@@ -58,7 +58,7 @@ function fetchProducts($minPrice = null, $maxPrice = null, $categoryId = null, $
 
 function fetchProductsById($id)
 {
-    $apiUrl = API_BASE_URL . '/products/get_products.php?id=' . $id;
+    $apiUrl = API_BASE_URL . '/products.php?id=' . $id;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -74,7 +74,7 @@ function fetchProductsById($id)
 
 function fetchCategories()
 {
-    $apiUrl = API_BASE_URL . '/categories/get_categories.php';
+    $apiUrl = API_BASE_URL . '/categories.php';
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -127,7 +127,7 @@ function handleLogout()
 // function to process the logout API call
 function logoutUser()
 {
-    $apiUrl = API_BASE_URL . '/auth/user/logout.php';
+    $apiUrl = API_BASE_URL . '/users.php/logout';
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -157,7 +157,7 @@ function fetchUserOrders($status = null)
         $queryParams['status'] = $status;
     }
 
-    $apiUrl = API_BASE_URL . '/orders/get_user_orders.php';
+    $apiUrl = API_BASE_URL . '/orders.php?user=true';
     if (!empty($queryParams)) {
         $apiUrl .= '?' . http_build_query($queryParams);
     }
@@ -198,7 +198,7 @@ function fetchAllOrders($status = null, $sort = 'latest')
         $queryParams['sort'] = $sort;
     }
 
-    $apiUrl = API_BASE_URL . '/orders/get_all_orders.php';
+    $apiUrl = API_BASE_URL . '/orders.php';
     if (!empty($queryParams)) {
         $apiUrl .= '?' . http_build_query($queryParams);
     }

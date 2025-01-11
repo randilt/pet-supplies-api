@@ -1,9 +1,9 @@
 <?php
 
-require_once '../../../config/database.php';
-require_once '../../../utils/Response.php';
-require_once '../../../utils/Database.php';
-require_once '../../../utils/Auth.php';
+require_once '../../config/database.php';
+require_once '../../utils/Response.php';
+require_once '../../utils/Database.php';
+require_once '../../utils/Auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     Response::json(['error' => 'Method not allowed'], 405);

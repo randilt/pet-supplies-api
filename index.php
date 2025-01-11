@@ -13,8 +13,6 @@ $routes = [
     "/profile" => "views/user-profile.view.php",
     "/admin/login" => "views/admin-login.view.php",
     "/admin/dashboard" => "views/admin-dashboard.view.php",
-    "/admin/dashboard/edit" => "views/admin-edit-product.view.php",
-
 ];
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
