@@ -122,6 +122,7 @@ async function handleCheckout(event) {
     window.location.href = `/profile#orders`
   } catch (error) {
     alert('An error occured while placing the order')
+    window.location.href = '/login'
     console.error('Checkout error:', error.message, error.status)
   }
 }

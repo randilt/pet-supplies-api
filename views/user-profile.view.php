@@ -8,9 +8,12 @@ require_once dirname(__DIR__) . '/functions.php';
 $db = new Database();
 $auth = new Auth($db);
 
-// ensure the user is logged in
-$auth->requireAuth();
-$userId = $_SESSION['user_id'] ?? $_SESSION['admin_id'] ?? null;
+$userId = $_SESSION['user_id'] ?? null;
+if ($userId === null) {
+    header('Location: /login');
+    exit;
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     handleLogout();

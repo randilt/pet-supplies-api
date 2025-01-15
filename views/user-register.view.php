@@ -1,10 +1,12 @@
 <?php
-require_once dirname(__DIR__) . '/utils/Response.php';
 require_once dirname(__DIR__) . '/utils/Database.php';
-require_once dirname(__DIR__) . '/utils/Auth.php';
 require_once dirname(__DIR__) . '/config/database.php';
+require_once dirname(__DIR__) . '/models/UserModel.php';
+require_once dirname(__DIR__) . '/utils/Auth.php';
+
 
 $db = new Database();
+$userModel = new UserModel($db);
 $auth = new Auth($db);
 
 // if user is already logged in, redirect to profile
@@ -20,10 +22,15 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $name = $_POST['name'] ?? '';
 
-    if ($auth->loginUser($email, $password)) {
-        header('Location: ./profile');
-        exit;
+    if ($userModel->registerUser($email, $password, $name)) {
+        $success = 'Registration successful! Logging in...';
+        if ($auth->loginUser($email, $password)) {
+            header('Location: ./profile');
+            exit;
+        }
+        $error = 'An error occurred while logging in. Please try again.';
     } else {
         $error = 'Invalid email or password';
     }
@@ -35,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php
 
-$title = 'Login | Pawsome';
+$title = 'Register | Pawsome';
 
 require_once 'partials/header.php'; ?>
 
@@ -51,8 +58,8 @@ require_once 'partials/header.php'; ?>
                     <path
                         d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.5 6c.828 0 1.5.672 1.5 1.5S18.328 9 17.5 9 16 8.328 16 7.5 16.672 6 17.5 6zm-11 0C7.328 6 8 6.672 8 7.5S7.328 9 6.5 9 5 8.328 5 7.5 5.672 6 6.5 6zM12 20c-2.761 0-5-2.239-5-5s2.239-5 5-5 5 2.239 5 5-2.239 5-5 5zm6.5-8c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm-13 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z" />
                 </svg>
-                <h1 class="text-4xl text-gray-800 font-chewy">Welcome Back!</h1>
-                <p class="text-gray-600 mt-2">Log in to your Pawsome account</p>
+                <h1 class="text-4xl text-gray-800 font-chewy">Welcome to Pawsome!</h1>
+                <p class="text-gray-600 mt-2">Register to Pawsome!</p>
             </div>
 
             <?php if ($error): ?>
@@ -62,6 +69,11 @@ require_once 'partials/header.php'; ?>
             <?php endif; ?>
 
             <form method="POST" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" id="name" name="name" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]">
+                </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                     <input type="email" id="email" name="email" required
@@ -75,13 +87,13 @@ require_once 'partials/header.php'; ?>
 
                 <button type="submit"
                     class="w-full bg-[#FF9800] text-white py-2 px-4 rounded-md hover:bg-[#F57C00] focus:outline-none focus:ring-2 focus:ring-[#FF9800] focus:ring-opacity-50 transition duration-300">
-                    Log in
+                    Register
                 </button>
             </form>
 
             <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600">Don't have an account?
-                    <a href="./register" class="font-medium text-[#FF9800] hover:text-[#F57C00]">Sign up</a>
+                <p class="text-sm text-gray-600">Already have an account?
+                    <a href="./login" class="font-medium text-[#FF9800] hover:text-[#F57C00]">Sign in</a>
                 </p>
             </div>
 
