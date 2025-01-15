@@ -107,6 +107,11 @@ async function handleCheckout(event) {
 
     if (!response.ok) {
       const error = await response.json()
+      if (response.status === 401) {
+        alert('Please login to place an order')
+        window.location.href = '/login'
+        return
+      }
       throw new Error(error.errors?.[0] || 'Order creation failed')
     }
 
@@ -117,7 +122,7 @@ async function handleCheckout(event) {
     window.location.href = `/profile#orders`
   } catch (error) {
     alert('An error occured while placing the order')
-    console.error('Checkout error:', error)
+    console.error('Checkout error:', error.message, error.status)
   }
 }
 
