@@ -104,6 +104,7 @@ class Auth
         return true;
     }
 
+
     public function logout($redirectUrl = './')
     {
         session_destroy();
