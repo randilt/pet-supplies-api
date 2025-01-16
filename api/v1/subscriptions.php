@@ -39,10 +39,21 @@ try {
             }
             break;
         case 'POST':
-            $subscriptionController->subscribe();
+            if ($endpoint === 'plans') {
+                $subscriptionController->createPlan();
+            } else {
+                $subscriptionController->subscribe();
+            }
             break;
         case 'PUT':
-            $subscriptionController->cancel();
+            if ($endpoint === 'plans') {
+                $subscriptionController->updatePlan();
+            } else {
+                $subscriptionController->cancel();
+            }
+            break;
+        case 'DELETE':
+            $subscriptionController->deletePlan();
             break;
         default:
             Response::json(['error' => 'Method not allowed'], 405);

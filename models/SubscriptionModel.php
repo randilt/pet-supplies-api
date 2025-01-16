@@ -129,6 +129,86 @@ class SubscriptionModel
         return $this->getSubscription($subscriptionId);
     }
 
+    public function createPlan($data)
+    {
+        $conn = $this->db->getConnection();
+
+        $stmt = $conn->prepare("
+        INSERT INTO subscription_plans 
+        (name, description, price, duration_months, created_at)
+        VALUES (?, ?, ?, ?, NOW())
+    ");
+
+        $stmt->execute([
+            $data['name'],
+            $data['description'],
+            $data['price'],
+            $data['duration_months']
+        ]);
+
+        return $this->getPlan($conn->lastInsertId());
+    }
+
+    public function updatePlan($planId, $data)
+    {
+        $conn = $this->db->getConnection();
+
+        // Check if plan exists and has active subscriptions
+        $stmt = $conn->prepare("
+        SELECT COUNT(*) as active_count
+        FROM customer_subscriptions
+        WHERE plan_id = ? AND status = 'active' AND end_date > NOW()
+    ");
+        $stmt->execute([$planId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result['active_count'] > 0) {
+            throw new Exception("Cannot modify plan with active subscriptions");
+        }
+
+        $stmt = $conn->prepare("
+        UPDATE subscription_plans 
+        SET name = ?, 
+            description = ?, 
+            price = ?, 
+            duration_months = ?
+        WHERE id = ?
+    ");
+
+        $stmt->execute([
+            $data['name'],
+            $data['description'],
+            $data['price'],
+            $data['duration_months'],
+            $planId
+        ]);
+
+        return $this->getPlan($planId);
+    }
+
+    public function deletePlan($planId)
+    {
+        $conn = $this->db->getConnection();
+
+        // Check for active subscriptions
+        $stmt = $conn->prepare("
+        SELECT COUNT(*) as active_count
+        FROM customer_subscriptions
+        WHERE plan_id = ? AND status = 'active' AND end_date > NOW()
+    ");
+        $stmt->execute([$planId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result['active_count'] > 0) {
+            throw new Exception("Cannot delete plan with active subscriptions");
+        }
+
+        $stmt = $conn->prepare("DELETE FROM subscription_plans WHERE id = ?");
+        $stmt->execute([$planId]);
+
+        return true;
+    }
+
     private function getSubscription($subscriptionId)
     {
         $conn = $this->db->getConnection();

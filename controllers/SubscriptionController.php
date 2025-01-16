@@ -115,6 +115,112 @@ class SubscriptionController
         }
     }
 
+    public function createPlan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            Response::json(['error' => 'Method not allowed'], 405);
+        }
+
+        try {
+            $this->auth->requireAdmin();
+
+            $data = json_decode(file_get_contents('php://input'), true);
+            $this->validatePlanData($data);
+
+            $plan = $this->subscriptionModel->createPlan($data);
+
+            Response::json([
+                'message' => 'Subscription plan created successfully',
+                'plan' => $plan
+            ], 201);
+
+        } catch (Exception $e) {
+            Response::json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updatePlan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+            Response::json(['error' => 'Method not allowed'], 405);
+        }
+
+        try {
+            $this->auth->requireAdmin();
+
+            $planId = $_GET['id'] ?? null;
+            if (!$planId) {
+                Response::json(['error' => 'Plan ID is required'], 400);
+            }
+
+            $data = json_decode(file_get_contents('php://input'), true);
+            $this->validatePlanData($data);
+
+            $plan = $this->subscriptionModel->updatePlan($planId, $data);
+
+            Response::json([
+                'message' => 'Subscription plan updated successfully',
+                'plan' => $plan
+            ]);
+
+        } catch (Exception $e) {
+            Response::json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function deletePlan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+            Response::json(['error' => 'Method not allowed'], 405);
+        }
+
+        try {
+            $this->auth->requireAdmin();
+
+            $planId = $_GET['id'] ?? null;
+            if (!$planId) {
+                Response::json(['error' => 'Plan ID is required'], 400);
+            }
+
+            $this->subscriptionModel->deletePlan($planId);
+
+            Response::json([
+                'message' => 'Subscription plan deleted successfully',
+                'success' => true
+            ]);
+
+        } catch (Exception $e) {
+            Response::json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    private function validatePlanData($data)
+    {
+        $errors = [];
+
+        if (!isset($data['name']) || empty($data['name'])) {
+            $errors[] = "Plan name is required";
+        }
+
+        if (!isset($data['description']) || empty($data['description'])) {
+            $errors[] = "Plan description is required";
+        }
+
+        if (!isset($data['price']) || !is_numeric($data['price']) || $data['price'] < 0) {
+            $errors[] = "Valid price is required";
+        }
+
+        if (!isset($data['duration_months']) || !is_numeric($data['duration_months']) || $data['duration_months'] < 1) {
+            $errors[] = "Valid duration in months is required";
+        }
+
+        if (!empty($errors)) {
+            Response::json(['errors' => $errors], 400);
+            exit;
+        }
+    }
+
+
     private function validateSubscribeData($data)
     {
         if (!isset($data['plan_id'])) {
