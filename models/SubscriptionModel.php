@@ -21,7 +21,7 @@ class SubscriptionModel
             }
 
             // Check if user has active subscription
-            $activeSubscription = $this->getActiveSubscription($userId);
+            $activeSubscription = $this->getActiveSubscriptions($userId);
             if ($activeSubscription) {
                 throw new Exception("User already has an active subscription");
             }
@@ -88,20 +88,27 @@ class SubscriptionModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getActiveSubscription($userId)
+    public function getActiveSubscriptions($userId = null)
     {
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare("
+        $query = "
             SELECT cs.*, sp.name as plan_name, sp.description as plan_description, 
                    sp.price as plan_price, sp.duration_months
             FROM customer_subscriptions cs
             JOIN subscription_plans sp ON cs.plan_id = sp.id
-            WHERE cs.user_id = ? AND cs.status = 'active' 
-            AND cs.end_date > NOW()
-            LIMIT 1
-        ");
-        $stmt->execute([$userId]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+            WHERE cs.status = 'active' AND cs.end_date > NOW()
+        ";
+
+        if ($userId !== null) {
+            $query .= " AND cs.user_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([$userId]);
+        } else {
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function cancelSubscription($subscriptionId, $userId)

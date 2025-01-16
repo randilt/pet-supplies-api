@@ -61,7 +61,11 @@ class SubscriptionController
 
         try {
             $this->auth->requireAuth();
-            $userId = $_SESSION['user_id'];
+            $userId = $_SESSION['user_id'] ?? null;
+
+            if (!$userId) {
+                Response::json(['error' => 'User ID is required'], 400);
+            }
 
             $subscriptions = $this->subscriptionModel->getUserSubscriptions($userId);
             Response::json(['subscriptions' => $subscriptions]);
@@ -79,9 +83,14 @@ class SubscriptionController
 
         try {
             $this->auth->requireAuth();
-            $userId = $_SESSION['user_id'];
+            $userId = $_SESSION['user_id'] ?? null;
 
-            $subscription = $this->subscriptionModel->getActiveSubscription($userId);
+            if (!$userId) {
+                $subscriptions = $this->subscriptionModel->getActiveSubscriptions();
+                Response::json(['subscriptions' => $subscriptions]);
+            }
+
+            $subscription = $this->subscriptionModel->getActiveSubscriptions($userId);
             Response::json(['subscription' => $subscription]);
 
         } catch (Exception $e) {

@@ -129,6 +129,13 @@ $productsFrom5000 = $productsFrom5000['pagination']['total'];
                         <?php
                         break;
 
+                    case 'subscriptions':
+                        ?>
+                        <!-- Subscriptions table -->
+                        <?php include 'partials/adminDashboard/subscriptions_management.php'; ?>
+                        <?php
+                        break;
+
                     default:
                         ?>
                         <!-- Default Content -->

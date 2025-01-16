@@ -8,7 +8,7 @@
                 'products' => 'Products',
                 'categories' => 'Categories',
                 'orders' => 'Orders',
-                'customers' => 'Customers'
+                'subscriptions' => 'Subscriptions'
             ];
 
             $currTab = isset($currTab) ? $currTab : 'statistics';
