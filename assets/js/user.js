@@ -129,7 +129,7 @@ async function handleReactivateSubscription(subscriptionId) {
       const subscriptions = await fetchUserSubscriptions(userId)
       displaySubscriptions(subscriptions)
     } else {
-      alert('Failed to reactivate subscription. Please try again.')
+      alert('Already have another active subscription!')
     }
   }
 }
