@@ -177,15 +177,19 @@ function editSubscriptionPlan(planId) {
   fetch(`/api/v1/subscriptions.php?endpoint=plans&id=${planId}`)
     .then((response) => response.json())
     .then((data) => {
-      if (data.plan) {
+      if (data.plans) {
         Swal.fire({
           title: 'Edit Subscription Plan',
           html: `
-                        <input id="planName" class="swal2-input" value="${data.plan.name}">
-                        <input id="planDescription" class="swal2-input" value="${data.plan.description}">
-                        <input id="planPrice" class="swal2-input" value="${data.plan.price}">
-                        <input id="planDuration" class="swal2-input" value="${data.plan.duration_months}">
-                    `,
+                <label for="planName">Plan Name</label>
+                <input id="planName" class="swal2-input" value="${data.plans[0].name}">
+                <label for="planDescription">Description</label>
+                <input id="planDescription" class="swal2-input" value="${data.plans[0].description}">
+                <label for="planPrice">Price</label>
+                <input id="planPrice" class="swal2-input" value="${data.plans[0].price}">
+                <label for="planDuration">Duration (Months)</label>
+                <input id="planDuration" class="swal2-input" value="${data.plans[0].duration_months}">
+                `,
           focusConfirm: false,
           preConfirm: () => {
             return {
@@ -234,7 +238,7 @@ function updateSubscriptionPlan(planId, planData) {
       } else {
         Swal.fire(
           'Error',
-          data.message || 'Failed to update subscription plan',
+          data.error || 'Failed to update subscription plan',
           'error'
         )
       }

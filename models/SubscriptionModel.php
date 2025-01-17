@@ -93,9 +93,11 @@ class SubscriptionModel
         $conn = $this->db->getConnection();
         $query = "
             SELECT cs.*, sp.name as plan_name, sp.description as plan_description, 
-                   sp.price as plan_price, sp.duration_months
+               sp.price as plan_price, sp.duration_months, u.name as user_name, u.email as user_email, 
+               u.address as user_address
             FROM customer_subscriptions cs
             JOIN subscription_plans sp ON cs.plan_id = sp.id
+            JOIN users u ON cs.user_id = u.id
             WHERE cs.status = 'active' AND cs.end_date > NOW()
         ";
 
