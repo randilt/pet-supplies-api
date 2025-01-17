@@ -81,6 +81,16 @@ require_once 'partials/header.php';
                 </form>
             </div>
 
+            <div class="profile-section" id="subscriptions">
+                <h2 class="text-2xl font-bold mb-4">My Subscriptions <br>
+                    <p class="text-sm font-normal">Only most recent 3 subscriptions are shown</p>
+                </h2>
+
+                <div id="subscriptionsContainer" class="space-y-4">
+                    <p class="text-gray-600">Loading subscriptions...</p>
+                </div>
+            </div>
+
             <div class="profile-section" id="orders">
                 <h2 class="text-2xl font-bold mb-4">Recent Orders</h2>
                 <div id="ordersContainer" class="space-y-4">

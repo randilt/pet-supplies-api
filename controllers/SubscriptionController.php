@@ -116,12 +116,13 @@ class SubscriptionController
 
             $subscription = $this->subscriptionModel->cancelSubscription($subscriptionId, $userId);
             Response::json([
+                'success' => true,
                 'message' => 'Subscription cancelled successfully',
                 'subscription' => $subscription
             ]);
 
         } catch (Exception $e) {
-            Response::json(['error' => $e->getMessage()], 500);
+            Response::json(['error' => $e->getMessage(), 'success' => false], 500);
         }
     }
 
