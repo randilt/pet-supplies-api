@@ -44,12 +44,13 @@ class SubscriptionController
             );
 
             Response::json([
+                'success' => true,
                 'message' => 'Subscription created successfully',
                 'subscription' => $subscription
             ], 201);
 
         } catch (Exception $e) {
-            Response::json(['error' => $e->getMessage()], 500);
+            Response::json(['error' => $e->getMessage(), 'success' => false], 500);
         }
     }
 

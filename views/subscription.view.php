@@ -83,7 +83,7 @@ require 'partials/header.php';
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold mb-4 text-center">Basic Paw</h3>
-                        <p class="text-4xl font-bold text-center mb-6">$29.99<span
+                        <p class="text-4xl font-bold text-center mb-6">Rs. 3499.99<span
                                 class="text-lg font-normal">/month</span></p>
                         <ul class="space-y-3 mb-6">
                             <li class="flex items-center">
@@ -114,7 +114,8 @@ require 'partials/header.php';
                     </div>
                     <div class="p-6 bg-gray-50">
                         <button
-                            class="w-full bg-[#FF9800] text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition duration-300">
+                            class="w-full bg-[#FF9800] text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition duration-300 subscribe-btn"
+                            data-plan-id="1">
                             Subscribe Now
                         </button>
                     </div>
@@ -127,7 +128,7 @@ require 'partials/header.php';
                     </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold mb-4 text-center">Premium Paw</h3>
-                        <p class="text-4xl font-bold text-center mb-6">$49.99<span
+                        <p class="text-4xl font-bold text-center mb-6">Rs. 7499.99<span
                                 class="text-lg font-normal">/month</span></p>
                         <ul class="space-y-3 mb-6">
                             <li class="flex items-center">
@@ -166,7 +167,8 @@ require 'partials/header.php';
                     </div>
                     <div class="p-6 bg-gray-50">
                         <button
-                            class="w-full bg-[#FF9800] text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition duration-300">
+                            class="w-full bg-[#FF9800] text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition duration-300 subscribe-btn"
+                            data-plan-id="2">
                             Subscribe Now
                         </button>
                     </div>
@@ -176,7 +178,7 @@ require 'partials/header.php';
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold mb-4 text-center">Deluxe Paw</h3>
-                        <p class="text-4xl font-bold text-center mb-6">$79.99<span
+                        <p class="text-4xl font-bold text-center mb-6">Rs. 14999.99<span
                                 class="text-lg font-normal">/month</span></p>
                         <ul class="space-y-3 mb-6">
                             <li class="flex items-center">
@@ -223,7 +225,8 @@ require 'partials/header.php';
                     </div>
                     <div class="p-6 bg-gray-50">
                         <button
-                            class="w-full bg-[#FF9800] text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition duration-300">
+                            class="w-full bg-[#FF9800] text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition duration-300 subscribe-btn"
+                            data-plan-id="3">
                             Subscribe Now
                         </button>
                     </div>
@@ -231,55 +234,6 @@ require 'partials/header.php';
             </div>
         </div>
     </section>
-
-    <!-- Customization Options -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-5xl font-chewy text-center mb-12">Customize Your Box</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Pet Type</h3>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input type="radio" name="pet-type" class="form-radio text-[#FF9800]" checked>
-                                <span class="ml-2">Dog</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="pet-type" class="form-radio text-[#FF9800]">
-                                <span class="ml-2">Cat</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Size</h3>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input type="radio" name="size" class="form-radio text-[#FF9800]">
-                                <span class="ml-2">Small (0-20 lbs)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="size" class="form-radio text-[#FF9800]" checked>
-                                <span class="ml-2">Medium (20-50 lbs)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="size" class="form-radio text-[#FF9800]">
-                                <span class="ml-2">Large (50+ lbs)</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <h3 class="text-xl font-bold mb-4">Allergies or Preferences</h3>
-                    <textarea
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF9800] focus:border-[#FF9800]"
-                        rows="4"
-                        placeholder="Let us know if your pet has any allergies or specific preferences"></textarea>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <!-- CTA -->
     <section class="py-16 bg-[#FF9800] text-white">
@@ -293,6 +247,82 @@ require 'partials/header.php';
         </div>
     </section>
     <?php require 'partials/footer.php'; ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setupSubscriptionButtons();
+        });
+
+        function setupSubscriptionButtons() {
+            const subscribeButtons = document.querySelectorAll('.subscribe-btn');
+            subscribeButtons.forEach(button => {
+                button.addEventListener('click', handleSubscription);
+            });
+        }
+
+        function handleSubscription(event) {
+            const planId = event.target.getAttribute('data-plan-id');
+
+            Swal.fire({
+                title: 'Confirm Subscription',
+                text: 'Are you sure you want to subscribe to this plan?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, subscribe!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    subscribeUser(planId);
+                }
+            });
+        }
+
+        function subscribeUser(planId) {
+            fetch('/api/v1/subscriptions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ plan_id: planId }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire(
+                            'Subscribed!',
+                            'You have successfully subscribed to the plan.',
+                            'success'
+                        );
+                        // Optionally, update the UI or redirect the user
+                    } else {
+                        if (data.error === 'Unauthorized access') {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'You must be logged in to subscribe to a plan',
+                                icon: 'error',
+                                confirmButtonText: 'Log in now'
+                            }).then(() => {
+                                window.location.href = './login';
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                data.error || 'Failed to subscribe to the plan',
+                                'error'
+                            );
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire(
+                        'Error',
+                        'An error occurred while processing your subscription',
+                        'error'
+                    );
+                });
+        }
+    </script>
 </body>
 
 </html>
