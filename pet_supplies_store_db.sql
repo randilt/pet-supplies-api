@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jan 04, 2025 at 06:40 PM
+-- Generation Time: Jan 18, 2025 at 06:02 AM
 -- Server version: 8.0.40
 -- PHP Version: 8.2.8
 
@@ -114,6 +114,20 @@ CREATE TABLE `customer_subscriptions` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `customer_subscriptions`
+--
+
+INSERT INTO `customer_subscriptions` (`id`, `user_id`, `plan_id`, `start_date`, `end_date`, `status`, `created_at`) VALUES
+(3, 3, 1, '2025-01-17', '2025-01-17', 'cancelled', '2025-01-17 15:07:05'),
+(4, 3, 3, '2025-01-17', '2025-01-17', 'cancelled', '2025-01-17 15:21:10'),
+(5, 3, 3, '2025-01-17', '2025-01-17', 'cancelled', '2025-01-17 15:28:38'),
+(6, 3, 3, '2025-01-17', '2025-01-17', 'cancelled', '2025-01-17 15:31:02'),
+(7, 3, 3, '2025-01-17', '2025-01-17', 'cancelled', '2025-01-17 15:31:09'),
+(8, 3, 3, '2025-01-17', '2025-01-17', 'cancelled', '2025-01-17 15:34:20'),
+(9, 3, 1, '2025-01-17', '2026-01-17', 'active', '2025-01-17 15:34:43'),
+(10, 8, 3, '2025-01-18', '2026-01-18', 'active', '2025-01-18 04:43:39');
+
 -- --------------------------------------------------------
 
 --
@@ -140,7 +154,12 @@ INSERT INTO `orders` (`id`, `user_id`, `total_amount`, `status`, `shipping_addre
 (3, 1, 1652.00, 'pending', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-01 14:20:14', '2025-01-01 14:20:14'),
 (4, 1, 6152.00, 'shipped', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-01 14:24:19', '2025-01-02 15:51:40'),
 (5, 3, 5400.00, 'cancelled', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-02 16:01:51', '2025-01-04 17:43:57'),
-(6, 1, 3452.00, 'pending', '123 Main St, Anytown, USA', '2025-01-04 18:33:01', '2025-01-04 18:33:01');
+(6, 1, 3452.00, 'pending', '123 Main St, Anytown, USA', '2025-01-04 18:33:01', '2025-01-04 18:33:01'),
+(7, 3, 10.99, 'pending', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-15 16:24:48', '2025-01-15 16:24:48'),
+(8, 3, 10.99, 'pending', '6/8, Delgoda', '2025-01-15 16:25:24', '2025-01-15 16:25:24'),
+(9, 3, 10.99, 'pending', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-15 16:33:27', '2025-01-15 16:33:27'),
+(10, 7, 10.99, 'pending', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-15 16:47:45', '2025-01-15 16:47:45'),
+(11, 8, 2666.99, 'pending', '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana, Delgoda', '2025-01-18 04:45:42', '2025-01-18 04:45:42');
 
 -- --------------------------------------------------------
 
@@ -175,7 +194,14 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price_at
 (11, 5, 58, 4, 650.00, '2025-01-02 16:01:51'),
 (12, 5, 57, 2, 800.00, '2025-01-02 16:01:51'),
 (13, 6, 56, 2, 1500.00, '2025-01-04 18:33:01'),
-(14, 6, 59, 1, 452.00, '2025-01-04 18:33:01');
+(14, 6, 59, 1, 452.00, '2025-01-04 18:33:01'),
+(15, 7, 78, 1, 10.99, '2025-01-15 16:24:48'),
+(16, 8, 78, 1, 10.99, '2025-01-15 16:25:24'),
+(17, 9, 78, 1, 10.99, '2025-01-15 16:33:27'),
+(18, 10, 78, 1, 10.99, '2025-01-15 16:47:45'),
+(19, 11, 78, 1, 10.99, '2025-01-18 04:45:42'),
+(20, 11, 59, 3, 452.00, '2025-01-18 04:45:42'),
+(21, 11, 58, 2, 650.00, '2025-01-18 04:45:42');
 
 -- --------------------------------------------------------
 
@@ -206,10 +232,10 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `st
 (55, 2, 'Meow Mix', 'Chewy and tasty treats for training and rewarding dogs', 1500.52, 1, 'https://i5.walmartimages.com/seo/Meow-Mix-Original-Choice-Dry-Cat-Food-3-15-Pound-Bag_90e53992-78bf-4e3e-b302-b673690cdb78.3f81121ebc52fbb5b1aaec7bed516d70.jpeg', '2024-11-19 16:01:45', '2025-01-04 18:29:14', NULL, 'Chewy and tasty treats for training and rewarding dogs Chewy and tasty treats for training and rewarding dogs Chewy and tasty treats for training and rewarding dogs', 'active'),
 (56, 1, 'Deluxe Dog Treats 1', 'Tasty dog treats for training and rewarding.', 1500.00, 141, 'https://www.acozykitchen.com/wp-content/uploads/2024/02/dog_treats_12-500x500.jpg', '2024-11-19 16:59:59', '2025-01-04 18:33:01', NULL, 'asdTasty dog treats for training and rewarding.Tasty dog treats for training and rewarding.Tasty dog treats for training and rewarding.', 'active'),
 (57, 2, 'Premium Cat Food 1', 'High-quality cat food for your feline friends.', 800.00, 3, 'https://m.media-amazon.com/images/I/71pjz7sTLrL._AC_SL1500_.jpg', '2024-11-19 17:03:36', '2025-01-04 18:29:14', NULL, 'Deluxe Dog Treats 3 are crafted with care to ensure your furry friend enjoys a nutritious and delicious snack. These premium dog treats are made with high-quality, all-natural ingredients to promote health and happiness in dogs of all breeds and sizes.', 'active'),
-(58, 1, 'Chewy Dog Bones 2', 'Long-lasting dog bones for hours of chewing fun.', 650.00, 116, 'https://cobbydog.com/cdn/shop/products/CD_Products900__0005s_0005_Final_CHW5084Revised-02.jpg?v=1683211132', '2024-11-19 17:04:11', '2025-01-04 18:29:14', NULL, NULL, 'active'),
-(59, 2, 'Catnip Cat Toys for your lovely cat 2', 'Engaging catnip toys that your cat will love. asdasda', 452.00, 7, 'https://m.media-amazon.com/images/I/715EiqpJ6XL.jpg', '2024-11-19 17:04:45', '2025-01-04 18:33:01', NULL, 'Engaging catnip toys that your cat will love.Engaging catnip toys that your cat will love.Engaging catnip toys that your cat will love. asdad', 'active'),
+(58, 1, 'Chewy Dog Bones 2', 'Long-lasting dog bones for hours of chewing fun.', 650.00, 114, 'https://cobbydog.com/cdn/shop/products/CD_Products900__0005s_0005_Final_CHW5084Revised-02.jpg?v=1683211132', '2024-11-19 17:04:11', '2025-01-18 04:45:42', NULL, NULL, 'active'),
+(59, 2, 'Catnip Cat Toys for your lovely cat 2', 'Engaging catnip toys that your cat will love. asdasda', 452.00, 4, 'https://m.media-amazon.com/images/I/715EiqpJ6XL.jpg', '2024-11-19 17:04:45', '2025-01-18 04:45:42', NULL, 'Engaging catnip toys that your cat will love.Engaging catnip toys that your cat will love.Engaging catnip toys that your cat will love. asdad', 'active'),
 (76, 3, 'Pet Toy | Interactive Dog Toy | Durable Play Toy', 'Durable interactive pet toy designed to keep your dog engaged, promoting healthy play and reducing boredom.', 1200.00, 14, 'https://image.chewy.com/is/image/catalog/68074_MAIN._AC_SS1800_V1628101907_.jpg', '2024-11-28 16:20:42', '2025-01-04 18:27:39', NULL, 'Deluxe Dog Treats 3 are crafted with exceptional care to ensure your furry friend enjoys a nutritious and delicious snack that they\'ll eagerly look forward to every time. These premium dog treats are made with high-quality, all-natural ingredients, specifically chosen to promote overall health and happiness in dogs of all breeds and sizes.\n\nPacked with essential nutrients, these treats are not only a tasty reward but also a boost to your dog\'s well-being. They support healthy digestion, a shiny coat, strong teeth, and an active lifestyle. Whether you\'re using them during training sessions, as a reward for good behavior, or simply as a way to show your love, these treats are perfect for every occasion.\n\nAvailable in different sizes to suit the unique needs of small, medium, and large breeds, Deluxe Dog Treats 3 are designed to cater to dogs of all shapes and sizes. Made without artificial preservatives or fillers, they offer a wholesome snack option that you can feel good about giving to your pet.\n\nMake snack time a delightful and healthy experience for your dog with Deluxe Dog Treats 3—because your four-legged companion deserves nothing but the best.', 'inactive'),
-(78, 1, 'Premium Cat Litter', 'High-absorbent and odor-neutralizing cat litter for a fresh and clean home.', 10.99, 100, 'https://example.com/images/cat-litter.jpg', '2025-01-04 18:30:19', '2025-01-04 18:30:19', '[{\"type\":\"weight\",\"values\":[\"5kg\",\"10kg\",\"15kg\"],\"price_adjustments\":[0,5,10]},{\"type\":\"scent\",\"values\":[\"lavender\",\"unscented\",\"lemon\"],\"price_adjustments\":[0,0,0]}]', 'Our premium cat litter is designed to provide maximum absorbency and superior odor control, ensuring a hygienic environment for your cat.', 'active');
+(78, 1, 'Premium Cat Litterr', 'High-absorbent and odor-neutralizing cat litter for a fresh and clean home.', 10.99, 95, 'https://example.com/images/cat-litter.jpg', '2025-01-04 18:30:19', '2025-01-18 04:45:42', '[{\"type\":\"weight\",\"values\":[\"5kg\",\"10kg\",\"15kg\"],\"price_adjustments\":[0,5,10]},{\"type\":\"scent\",\"values\":[\"lavender\",\"unscented\",\"lemon\"],\"price_adjustments\":[0,0,0]}]', 'Our premium cat litter is designed to provide maximum absorbency and superior odor control, ensuring a hygienic environment for your cat.', 'active');
 
 -- --------------------------------------------------------
 
@@ -225,6 +251,15 @@ CREATE TABLE `subscription_plans` (
   `duration_months` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subscription_plans`
+--
+
+INSERT INTO `subscription_plans` (`id`, `name`, `description`, `price`, `duration_months`, `created_at`) VALUES
+(1, 'Basic Paw', '2-3 Toys\n1-2 Bags of Treats\n1 Chew Item', 3499.99, 12, '2025-01-16 17:30:30'),
+(2, 'Premium Paw', '4-5 Toys\r\n2-3 Bags of Premium Treats\r\n2 Chew Items\r\n1 Accessory (collar, bandana, etc.)', 7499.99, 12, '2025-01-17 15:05:10'),
+(3, 'Deluxe Paw', '6-7 Premium Toys\r\n3-4 Bags of Gourmet Treats\r\n3 Long-lasting Chews\r\n2 Accessories\r\n1 Surprise Luxury Item', 14999.99, 12, '2025-01-17 15:05:10');
 
 -- --------------------------------------------------------
 
@@ -252,7 +287,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `full_name
 (2, '', 'test2@example.com', '$2y$10$lZ919sqYO3sSaq/QPkCJ/OhuCiqmhLIHxZGpAdg6GfEbdHW35mYTC', '2024-11-19 10:28:15', NULL, NULL, NULL),
 (3, 'Randil Tharusha', 'randil@test.com', '$2y$10$d8xRoOAJTQZyBOlCuH7S3.1P72VW8yobfS7CI4YISI02MeaegClzi', '2024-12-29 08:04:22', NULL, '6/8\nRohitha Weerakon Mawatha, Katulanda, Dekatana', '0788683097'),
 (4, 'Tharusha', 'randil2@test.com', '$2y$10$WEWRB9JCdHMnZzoVgdXrheM2kFoN2U02Yxth3Qy.BgZkLJcSSZ6ku', '2024-12-29 08:24:54', NULL, '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana', '0781347983'),
-(5, 'Randika', 'test111@example.com', '$2y$10$7..MLRIugVt3gK1AqrUWsO6bdJjA4V2X6fgbVzPJsaRxdiML4GZOG', '2025-01-04 18:08:02', NULL, NULL, NULL);
+(5, 'Randika', 'test111@example.com', '$2y$10$7..MLRIugVt3gK1AqrUWsO6bdJjA4V2X6fgbVzPJsaRxdiML4GZOG', '2025-01-04 18:08:02', NULL, NULL, NULL),
+(6, 'Randil Withanage', 'rane@test.com', '$2y$10$Ssi/8.jC1GD9Jv/wfL8ytOsRlCiwGHY7uxQK9wxFQIQQSU6G8geue', '2025-01-15 16:43:14', NULL, NULL, NULL),
+(7, 'Withanage Randil Tharusha Wijesiri Withana', 'asd@asd.asd', '$2y$10$K9ZVySYtZPNRAnSRJCiIUu3m0rT3Xc51a0yDbhKjL9FwLAOUoyZjO', '2025-01-15 16:46:32', NULL, '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana\nRohitha Weerakon Mawatha, Katulanda, Dekatana', '0781347983'),
+(8, 'Withanage Randil Tharusha Wijesiri Withana', 'randiltharusha72@gmail.com', '$2y$10$eHNyNL6QPPlYN3YgghCmTOdrtbm7bEhrhvGILxdBki3xXPmo6B/Em', '2025-01-18 04:43:25', NULL, '6/8, Rohitha Weerakoon Mawatha, Katulanda, Dekatana\nRohitha Weerakon Mawatha, Katulanda, Dekatana', '0781347983');
 
 --
 -- Indexes for dumped tables
@@ -359,19 +397,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customer_subscriptions`
 --
 ALTER TABLE `customer_subscriptions`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -383,13 +421,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `subscription_plans`
 --
 ALTER TABLE `subscription_plans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
