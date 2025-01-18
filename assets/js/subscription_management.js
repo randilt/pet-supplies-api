@@ -87,7 +87,14 @@ function fetchUserSubscriptions() {
                         <td class="py-2 px-4 border-b">${subscription.end_date}</td>
                         <td class="py-2 px-4 border-b">${subscription.status}</td>
                         <td class="py-2 px-4 border-b">
-                            <button onclick="cancelSubscription(${subscription.id})" class="text-red-500 hover:underline">Cancel</button>
+                            <button onclick="viewDetails('${subscription.id}', 
+                     '${subscription.plan_name}', 
+                     '${subscription.start_date}', 
+                     '${subscription.end_date}', 
+                     '${subscription.user_name}', 
+                     '${subscription.user_email}', 
+                     '${subscription.duration_months}', 
+                     '${subscription.plan_price}')" class="text-red-500 hover:underline">View Details</button>
                         </td>
                     </tr>
                 `
@@ -296,49 +303,31 @@ function deleteSubscriptionPlan(planId) {
   })
 }
 
-function cancelSubscription(subscriptionId) {
+function viewDetails(
+  id,
+  plan_name,
+  start_date,
+  end_date,
+  name,
+  email,
+  duration_months,
+  plan_price
+) {
+  console.log('subscription:', id)
   Swal.fire({
-    title: 'Are you sure?',
-    text: "This will cancel the user's subscription!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, cancel it!',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      fetch(`/api/v1/subscriptions.php?id=${subscriptionId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status: 'cancelled' }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            Swal.fire(
-              'Cancelled!',
-              'The subscription has been cancelled.',
-              'success'
-            )
-            fetchUserSubscriptions()
-          } else {
-            Swal.fire(
-              'Error',
-              data.message || 'Failed to cancel subscription',
-              'error'
-            )
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error)
-          Swal.fire(
-            'Error',
-            'An error occurred while cancelling the subscription',
-            'error'
-          )
-        })
-    }
+    title: 'Subscription Details',
+    html: `
+      <p><strong>ID:</strong> ${id}</p>
+      <p><strong>Plan Name:</strong> ${plan_name}</p>
+      <p><strong>Start Date:</strong> ${start_date}</p>
+      <p><strong>End Date:</strong> ${end_date}</p>
+      <p><strong>User Name:</strong> ${name}</p>
+      <p><strong>User Email:</strong> ${email}</p>
+      <p><strong>Plan Price:</strong> LKR ${parseFloat(plan_price).toFixed(
+        2
+      )}</p>
+      <p><strong>Duration (Months):</strong> ${duration_months}</p>
+    `,
+    confirmButtonText: 'Close',
   })
 }
