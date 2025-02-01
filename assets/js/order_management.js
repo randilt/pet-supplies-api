@@ -85,7 +85,7 @@ function fetchOrders() {
 }
 
 function viewOrderDetails(orderId) {
-  fetch(`${apiUrl}/orders/get_all_orders.php`)
+  fetch(`${apiUrl}/v1/orders.php`)
     .then((response) => response.json())
     .then((data) => {
       const order = data.orders.find((o) => o.id === orderId)
